@@ -63,7 +63,10 @@ export default function Latest() {
                 </div>
 
                 <div className="flex justify-center items-center">
-                    <button className="text-white font-inter p-3 bg-primary hover:bg-opacity-80 active:bg-opacity-60"> Check open positions</button>
+                    <button className="text-white font-semibold font-inter p-3 bg-primary hover:bg-opacity-80 active:bg-opacity-60">
+                        {" "}
+                        Check open positions
+                    </button>
                 </div>
             </div>
         </section>

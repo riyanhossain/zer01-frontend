@@ -4,7 +4,7 @@ import about from "../../assets/home/about/about.png";
 
 export default function About() {
     return (
-        <section className=" py-8 lg:py-16 container mx-auto px-4 lg:px-8 xl:px-20">
+        <section className=" py-8 lg:py-20 container mx-auto px-4 lg:px-8 xl:px-20">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-8">
                 <div className="flex flex-col justify-center gap-y-3">
                     <h1 className="text-[32px] leading-[48px] font-semibold text-addblack font-poppins">
@@ -94,7 +94,7 @@ export default function About() {
                         alt="about"
                         width={"465.39px"}
                         height={"465.39px"}
-                        className="w-full md:w-[359.74px] h-[465.39px]  absolute top-0 lg:right-16"
+                        className="w-full md:w-[359.74px] h-[400px] md:h-[465.39px]  lg:absolute top-0 lg:right-16"
                     />
                 </div>
             </div>
