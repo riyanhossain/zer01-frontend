@@ -7,12 +7,12 @@ export default function Footer() {
     return (
         <footer>
             <section className="py-8 lg:py-16 container mx-auto px-4 lg:px-8 xl:px-20 ">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[25%_10%_40%_25%]">
-                    <div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[25%_10%_40%_25%] gap-y-5">
+                    <div className="flex flex-col items-center lg:items-start">
                         <Image src={logo} alt="logo" className="w-[204px] h-[175px]" />
                     </div>
 
-                    <div className="space-y-3">
+                    <div className="space-y-3 flex flex-col items-center lg:items-start">
                         <h1 className="text-lg  font-poppins font-medium text-addblack border-b-4 border-primary w-[86px] text-center">Pages</h1>
 
                         <ul className="space-y-3">
@@ -158,27 +158,29 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    <div>
+                    <div className="flex flex-col items-center lg:items-start">
                         <h1 className="text-lg  font-poppins font-medium text-addblack border-b-4 border-primary w-[86px] text-center">Contact</h1>
 
                         <div className="space-y-1 mt-3">
-                            <p className="text-primary font-poppins">Phone:</p>
-                            <p className="text-addgray font-inter">+4(0) 743 430 098</p>
+                            <p className="text-primary font-poppins text-center lg:text-start">Phone:</p>
+                            <p className="text-addgray font-inter text-center lg:text-start">+4(0) 743 430 098</p>
                         </div>
 
                         <div className="space-y-1 mt-3">
-                            <p className="text-primary font-poppins">Email:</p>
-                            <p className="text-addgray font-inter">contact@zero1code.com</p>
+                            <p className="text-primary font-poppins text-center lg:text-start">Email:</p>
+                            <p className="text-addgray font-inter text-center lg:text-start">contact@zero1code.com</p>
                         </div>
                         <div className="space-y-1 mt-3">
-                            <p className="text-primary font-poppins">Location:</p>
-                            <p className="text-addgray font-inter">Str. 13 Septembrie , Nr. 12A, Cluj-Napoca, Cluj, Romania</p>
+                            <p className="text-primary font-poppins text-center lg:text-start">Location:</p>
+                            <p className="text-addgray font-inter text-center lg:text-start">
+                                Str. 13 Septembrie , Nr. 12A, Cluj-Napoca, Cluj, Romania
+                            </p>
                         </div>
                     </div>
                 </div>
             </section>
             <section className="container mx-auto px-4 lg:px-8 xl:px-20 py-4 lg:py-6 border-t border-[#E7E7E7]">
-                <p className="text-sm text-[#484848]">© {new Date().getFullYear()}, Zer01 CODE. All Rights Reserved </p>
+                <p className="text-sm text-[#484848] text-center lg:text-start">© {new Date().getFullYear()}, Zer01 CODE. All Rights Reserved </p>
             </section>
         </footer>
     );

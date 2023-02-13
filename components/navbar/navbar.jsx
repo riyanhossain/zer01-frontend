@@ -10,12 +10,12 @@ export default function Navbar() {
     return (
         <nav className=" bg-[#3983781A] ">
             <div className="container mx-auto px-4 lg:px-8 xl:px-20 ">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between relative py-6">
                     <Link href="/">
-                        <Image src={logo} width={100} height={100} />
+                        <Image src={logo} width={100} height={100} className="absolute z-50 top-0" />
                     </Link>
 
-                    <div className="hidden lg:flex items-center space-x-8">
+                    <div className="hidden lg:flex items-center space-x-8 ml-64">
                         <Link href="/">
                             <p className="text-[#212121] font-poppins  hover:text-[#398378]">Home</p>
                         </Link>
@@ -39,8 +39,8 @@ export default function Navbar() {
                         {!isOpen ? (
                             <button className="  lg:hidden w-10 h-10 " onClick={(prev) => setIsOpen(true)}>
                                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                                     <g id="SVGRepo_iconCarrier">
                                         <path d="M5 12H18" stroke="#398378" stroke-width="2" stroke-linecap="round"></path>{" "}
                                         <path d="M5 17H11" stroke="#398378" stroke-width="2" stroke-linecap="round"></path>{" "}
