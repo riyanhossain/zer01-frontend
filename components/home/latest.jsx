@@ -2,9 +2,9 @@ import React from "react";
 
 export default function Latest() {
     return (
-        <section className="container mx-auto py-12 flex justify-center">
-            <div className="max-w-6xl w-full p-6 shadow-[6px_6px_24px_rgba(0,0,0,0.12)] bg-white space-y-5">
-                <h1 className="text-center text-[32px] leading-[42px] font-poppins font-bold">Latest open positions</h1>
+        <section className="container mx-auto py-20 flex justify-center">
+            <div className="max-w-6xl w-full p-4 lg:p-6 shadow-[6px_6px_24px_rgba(0,0,0,0.12)] bg-white space-y-5">
+                <h1 className="text-center text-[32px] leading-[42px] font-poppins font-semibold">Latest open positions</h1>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 ">
                     {/* card */}
@@ -63,7 +63,7 @@ export default function Latest() {
                 </div>
 
                 <div className="flex justify-center items-center">
-                    <button className="text-white font-inter p-3 bg-primary"> Check open positions</button>
+                    <button className="text-white font-inter p-3 bg-primary hover:bg-opacity-80 active:bg-opacity-60"> Check open positions</button>
                 </div>
             </div>
         </section>

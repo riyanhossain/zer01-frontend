@@ -9,9 +9,9 @@ export default function Hero() {
     return (
         <section className="bg-[#F7FCFF] relative">
             <div className="container mx-auto px-4 lg:px-8 xl:px-20">
-                <div className=" py-12 lg:py-0 h-[740px]  lg:h-[580px] 2xl:min-h-[660px] flex flex-col lg:grid grid-cols-2">
+                <div className=" py-12 lg:py-0 h-[740px]  lg:h-[580px] 2xl:min-h-[660px] grid grid-cols-1 lg:grid-cols-2">
                     <div className="h-full flex flex-col justify-center space-y-8 ">
-                        <h1 className="text-3xl lg:text-6xl font-bold font-poppins w-[270px] lg:w-[625px]">
+                        <h1 className="text-3xl lg:text-6xl font-semibold font-poppins w-[270px] lg:w-[625px]">
                             <span className="text-primary  ">Freelance</span> Service For Your IT <span className="text-primary">Project</span>
                         </h1>
                         <div className="border-l-[4px]  border-primary ">
@@ -23,10 +23,10 @@ export default function Hero() {
 
                     <div className="flex justify-center items-center relative">
                         <Image src={hero} alt="hero" height={"433.48px"} width={"469.16px"} className="z-50" />
-                        <div className="absolute top-24 right-28">
+                        <div className="absolute top-0 right-12 lg:top-24 lg:right-28">
                             <Image src={mask1} alt="mask1" className="h-[125.02px] w-[128.09px]" />
                         </div>
-                        <div className="absolute bottom-24 left-36">
+                        <div className="absolute bottom-4 left-12 lg:bottom-24 lg:left-36">
                             <Image src={mask2} alt="mask1" className="h-[113.02px] w-[122.09px]" />
                         </div>
                     </div>
