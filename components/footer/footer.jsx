@@ -15,7 +15,7 @@ export default function Footer() {
                     <div className="space-y-3 flex flex-col items-center lg:items-start">
                         <h1 className="text-lg  font-poppins font-medium text-addblack border-b-4 border-primary w-[86px] text-center">Pages</h1>
 
-                        <ul className="space-y-3">
+                        <ul className="space-y-3 flex flex-col items-center lg:items-start">
                             <li>
                                 <Link
                                     href="/"

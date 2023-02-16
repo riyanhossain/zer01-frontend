@@ -12,7 +12,7 @@ export default function Professional() {
                     <div className="relative hidden lg:block">
                         <div>
                             <svg width="99" height="288" viewBox="0 0 99 288" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="1" y="1" width="97" height="286" stroke="#13BEFF" stroke-width="2" stroke-dasharray="2 2" />
+                                <rect x="1" y="1" width="97" height="286" stroke="#13BEFF" strokeWidth="2" stroke-dasharray="2 2" />
                             </svg>
                         </div>
                         <div className="absolute top-8 left-6">

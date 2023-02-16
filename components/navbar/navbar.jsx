@@ -10,9 +10,9 @@ export default function Navbar() {
     return (
         <nav className=" bg-[#3983781A] ">
             <div className="container mx-auto px-4 lg:px-8 xl:px-20 ">
-                <div className="flex items-center justify-between relative py-6">
+                <div className="flex items-center justify-between relative py-5 lg:py-7">
                     <Link href="/">
-                        <Image src={logo} width={100} height={100} className="absolute z-50 top-0" />
+                        <Image src={logo} width={100} height={100} className="absolute w-auto h-auto z-50 top-0" priority alt="logo"/>
                     </Link>
 
                     <div className="hidden lg:flex items-center space-x-8 ml-64">
@@ -42,17 +42,17 @@ export default function Navbar() {
                                     <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                                     <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                                     <g id="SVGRepo_iconCarrier">
-                                        <path d="M5 12H18" stroke="#398378" stroke-width="2" stroke-linecap="round"></path>{" "}
-                                        <path d="M5 17H11" stroke="#398378" stroke-width="2" stroke-linecap="round"></path>{" "}
-                                        <path d="M5 7H15" stroke="#398378" stroke-width="2" stroke-linecap="round"></path>{" "}
+                                        <path d="M5 12H18" stroke="#398378" strokeWidth="2" strokeLinecap="round"></path>{" "}
+                                        <path d="M5 17H11" stroke="#398378" strokeWidth="2" strokeLinecap="round"></path>{" "}
+                                        <path d="M5 7H15" stroke="#398378" strokeWidth="2" strokeLinecap="round"></path>{" "}
                                     </g>
                                 </svg>
                             </button>
                         ) : (
                             <button className="  lg:hidden w-10 h-10 " onClick={(prev) => setIsOpen(false)}>
                                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" strokeLinecap="round" stroke-linejoin="round"></g>
                                     <g id="SVGRepo_iconCarrier">
                                         {" "}
                                         <g clip-path="url(#clip0_429_11083)">
@@ -60,8 +60,8 @@ export default function Navbar() {
                                             <path
                                                 d="M7 7.00006L17 17.0001M7 17.0001L17 7.00006"
                                                 stroke="#398378"
-                                                stroke-width="2.5"
-                                                stroke-linecap="round"
+                                                strokeWidth="2.5"
+                                                strokeLinecap="round"
                                                 stroke-linejoin="round"
                                             ></path>{" "}
                                         </g>{" "}

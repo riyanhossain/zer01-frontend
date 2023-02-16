@@ -22,7 +22,7 @@ export default function Hero() {
                     </div>
 
                     <div className="flex justify-center items-center relative">
-                        <Image src={hero} alt="hero" height={"433.48px"} width={"469.16px"} className="z-50" />
+                        <Image src={hero} alt="hero" height={"433.48px"} width={"469.16px"} className="z-50" priority/>
                         <div className="absolute top-0 right-12 lg:top-24 lg:right-28">
                             <Image src={mask1} alt="mask1" className="h-[125.02px] w-[128.09px]" />
                         </div>

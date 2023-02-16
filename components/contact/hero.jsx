@@ -2,8 +2,8 @@ import React from "react";
 
 export default function Hero() {
     return (
-        <section className=" bg-[url('../assets/about/hero/bg.png')] bg-cover h-[300px] flex justify-center items-center bg-opacity-70 relative">
-            <h1 className="text-4xl font-semibold font-poppins text-white">About Us</h1>
+        <section className=" bg-[url('../assets/contact/hero/bg.png')] bg-cover h-[300px] flex justify-center items-center bg-opacity-70 relative">
+            <h1 className="text-4xl font-semibold font-poppins text-white">Contact Us</h1>
             <div className="absolute left-0 bottom-0">
                 <svg width="182" height="278" viewBox="0 0 182 278" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <ellipse
