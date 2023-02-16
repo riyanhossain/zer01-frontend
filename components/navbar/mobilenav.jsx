@@ -10,7 +10,7 @@ export default function Mobilenav() {
             <Link href="/professional">
                 <p className="text-[#212121] font-poppins  hover:text-[#398378]">For Professional</p>
             </Link>
-            <Link href="/companies">
+            <Link href="/company">
                 <p className="text-[#212121] font-poppins hover:text-[#398378]">For Companies</p>
             </Link>
 

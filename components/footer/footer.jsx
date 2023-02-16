@@ -36,7 +36,7 @@ export default function Footer() {
 
                             <li>
                                 <Link
-                                    href="/companies"
+                                    href="/company"
                                     className="text-addgray text-sm font-inter hover:text-primary transition-colors duration-200 ease-in-out"
                                 >
                                     For Companies
