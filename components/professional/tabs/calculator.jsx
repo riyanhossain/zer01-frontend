@@ -1,7 +1,11 @@
 import React from 'react'
+import Intro from './calculator/intro'
 
 export default function Calculator() {
   return (
-    <div>calculator</div>
+    <React.Fragment>
+        <Intro />
+
+    </React.Fragment>
   )
 }
