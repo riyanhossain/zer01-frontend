@@ -1,4 +1,8 @@
 import { Html, Head, Main, NextScript } from "next/document";
+import Modal from "react-modal";
+
+// Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
+Modal.setAppElement("#__next");
 
 export default function Document() {
     return (

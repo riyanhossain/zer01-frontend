@@ -6,7 +6,7 @@ export default function Professional() {
     return (
         <React.Fragment>
             <Hero />
-
+            
             <Tabs />
         </React.Fragment>
     );
