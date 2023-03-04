@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Calculationresults() {
     return (
-        <section className="my-5 py-6 bg-white shadow-[0px_4px_24px_rgba(122,122,122,0.1)]">
+        <section className="my-5 py-6 bg-white shadow-[0px_4px_24px_rgba(122,122,122,0.1)] w-[1376px] lg:w-auto ">
             <p className="px-6  text-lg font-poppins font-medium ">Calculated Results</p>
 
             <div className="py-2  grid grid-cols-[1fr_240px_240px_240px_150px]">

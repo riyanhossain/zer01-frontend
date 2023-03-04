@@ -249,7 +249,9 @@ export default function Calculationofcosts() {
             </div>
 
 
-            <Calculationresults />
+            <div className="overflow-x-scroll">
+                <Calculationresults />
+            </div>
         </section>
     );
 }
