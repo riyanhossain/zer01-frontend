@@ -2,8 +2,13 @@ import Footer from "@/components/footer/footer";
 import Navbar from "@/components/navbar/navbar";
 import "@/styles/globals.css";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 export default function App({ Component, pageProps }) {
+    const { pathname } = useRouter();
+
+    const isDashRoute = pathname.includes("/dashboard");
+
     return (
         <>
             <Head>
@@ -17,9 +22,9 @@ export default function App({ Component, pageProps }) {
                 />
                 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" /> */}
             </Head>
-            <Navbar />
+            {!isDashRoute && <Navbar />}
             <Component {...pageProps} />
-            <Footer />
+            {!isDashRoute && <Footer />}
         </>
     );
 }
