@@ -1,4 +1,5 @@
 import Activepositions from "@/components/dashboard/positions/activepositions";
+import Addnewjob from "@/components/dashboard/positions/addnewjob";
 import React from "react";
 
 export default function Positions() {
@@ -42,8 +43,8 @@ export default function Positions() {
             </div>
 
             {/* tabs */}
-            <Activepositions />
-
+            {/* <Activepositions /> */}
+            <Addnewjob />
         </section>
     );
 }

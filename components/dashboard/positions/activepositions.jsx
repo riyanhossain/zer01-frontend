@@ -51,16 +51,64 @@ export default function Activepositions() {
                     {/* submit button */}
 
                     <div className="py-3 flex justify-center">
-                        <button
-                            type="submit"
-                            className=" bg-primary text-white font-inter font-semibold py-2.5 px-8"
-                        >
+                        <button type="submit" className=" bg-primary text-white font-inter font-semibold py-2.5 px-8">
                             Apply
                         </button>
                     </div>
-
-                        
                 </form>
+            </div>
+
+            {/* table */}
+            <div className="p-3 bg-[#D9D9D9]">
+                <div className="grid grid-cols-[8%_12%_15%_18%_15%_32%] ">
+                    <div className=" font-poppins font-medium text-sm bg-white py-3.5 text-center border-r border-[#D9D5D5]">Nr.</div>
+                    <div className=" font-poppins font-medium text-sm bg-white py-3.5 text-center border-r border-[#D9D5D5]">ID</div>
+                    <div className=" font-poppins font-medium text-sm bg-white py-3.5 text-center border-r border-[#D9D5D5]">Job name</div>
+                    <div className=" font-poppins font-medium text-sm bg-white py-3.5 text-center border-r border-[#D9D5D5]">Collaboration form</div>
+                    <div className=" font-poppins font-medium text-sm bg-white py-3.5 text-center border-r border-[#D9D5D5]">Status</div>
+                    <div className=" font-poppins font-medium text-sm bg-white py-3.5 text-center">Actions</div>
+                </div>
+
+                <div className="grid grid-cols-[8%_12%_15%_18%_15%_32%] pt-3">
+                    <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">1</div>
+                    <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">Z01-DRAD23</div>
+                    <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">Java Developer</div>
+                    <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">B2B - SRL/PFA</div>
+                    <div className=" font-poppins font-medium text-sm py-3 text-center bg-primary">Active</div>
+                    <div className=" font-poppins font-medium text-sm bg-white  p-1 flex justify-around items-center">
+                        <button className="bg-primary text-white font-inter font-semibold  py-2 px-8 hover:bg-opacity-80 active:bg-opacity-90">
+                            Edit
+                        </button>
+
+                        <button className="bg-[#FF0000] text-white font-inter font-semibold py-2 px-6 hover:bg-opacity-80 active:bg-opacity-90">
+                            Delete
+                        </button>
+
+                        <button className="bg-[#102307] text-white font-inter font-semibold py-2 px-2 hover:bg-opacity-80 active:bg-opacity-90">
+                            Close Position
+                        </button>
+                    </div>
+                </div>
+                <div className="grid grid-cols-[8%_12%_15%_18%_15%_32%] pt-3">
+                    <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">2</div>
+                    <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">Z01-DRAD23</div>
+                    <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">Java Developer</div>
+                    <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">B2B - SRL/PFA</div>
+                    <div className=" font-poppins font-medium text-sm py-3 text-center bg-[#E1E1E1] ">Closed</div>
+                    <div className=" font-poppins font-medium text-sm bg-white  p-1 flex justify-around items-center">
+                        <button className="bg-primary text-white font-inter font-semibold  py-2 px-8 hover:bg-opacity-80 active:bg-opacity-90">
+                            Edit
+                        </button>
+
+                        <button className="bg-[#FF0000] text-white font-inter font-semibold py-2 px-6 hover:bg-opacity-80 active:bg-opacity-90">
+                            Delete
+                        </button>
+
+                        <button className=" bg-secondary text-white font-inter font-semibold py-2 px-[30px] hover:bg-opacity-80 active:bg-opacity-90">
+                            Reopen
+                        </button>
+                    </div>
+                </div>
             </div>
         </section>
     );
