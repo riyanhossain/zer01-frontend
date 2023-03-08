@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 *,
 *::before,
 *::after {
@@ -13,4 +12,8 @@
 
 body {
     background: #ffffff;
+}
+
+.ql-editor {
+    min-height: 200px;
 }

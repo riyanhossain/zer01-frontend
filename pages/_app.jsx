@@ -3,6 +3,7 @@ import Navbar from "@/components/navbar/navbar";
 import "@/styles/globals.css";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import "react-quill/dist/quill.snow.css";
 
 export default function App({ Component, pageProps }) {
     const { pathname } = useRouter();
