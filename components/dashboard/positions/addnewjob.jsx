@@ -2,6 +2,9 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+import { createPosition } from "../../../lib/api/position";
 
 const QuillNoSSRWrapper = dynamic(import("react-quill"), {
     ssr: false,
@@ -9,6 +12,7 @@ const QuillNoSSRWrapper = dynamic(import("react-quill"), {
 });
 
 export default function Addnewjob() {
+    const queryClient = useQueryClient();
     const router = useRouter();
     const {
         register,
@@ -24,14 +28,9 @@ export default function Addnewjob() {
         },
     });
 
-    const onSubmit = (data) => {
-        console.log(data);
-        console.log(errors);
-    };
-
     React.useEffect(() => {
         register("description", { required: true });
-        register("requirments", { required: true });
+        register("requirements", { required: true });
         register("language", { required: true });
     }, [register]);
 
@@ -40,7 +39,7 @@ export default function Addnewjob() {
     };
 
     const onRequirmentsChange = (editorState) => {
-        setValue("requirments", editorState);
+        setValue("requirements", editorState);
     };
 
     const onLanguagesChange = (editorState) => {
@@ -48,7 +47,7 @@ export default function Addnewjob() {
     };
 
     const description = watch("description");
-    const requirments = watch("requirments");
+    const requirments = watch("requirements");
     const languages = watch("language");
 
     const clearForm = () => {
@@ -60,8 +59,32 @@ export default function Addnewjob() {
         setValue("location", "remote");
         setValue("status", "all");
         setValue("description", "");
-        setValue("requirments", "");
+        setValue("requirements", "");
         setValue("language", "");
+        setValue("rate", "");
+        setValue("startDate", "");
+        setValue("endDate", "");
+    };
+
+    // Mutations
+    const mutation = useMutation({
+        mutationFn: createPosition,
+        onSuccess: (data) => {
+            // Invalidate and refetch
+            queryClient.invalidateQueries({ queryKey: ["position"] });
+
+            toast.success(data?.data.message);
+
+            clearForm();
+        },
+        onError: (error) => {
+            toast.error(error?.response?.data?.message);
+        },
+    });
+
+    const onSubmit = (data) => {
+        // errors && toast.error(errors.root.message);
+        mutation.mutate(data);
     };
 
     return (
@@ -210,10 +233,10 @@ export default function Addnewjob() {
 
                 <div className="py-3">
                     <label htmlFor="options">
-                        <span className="text-lg font-poppins text-[#464646] font-medium">Status</span>
+                        <span className="leading-[25px] font-inter">Status</span>
                         <select
                             name="options"
-                            className="w-full font-poppins text-[#2C2E3E] text-sm font-medium border border-[#E3E3E3] mt-1  p-2 outline-none focus:border-primary"
+                            className="w-full border border-[#E3E3E3] focus:border-primary outline-none leading-[25px] font-inter px-6 py-2"
                             required
                             {...register("status")}
                         >
@@ -241,13 +264,13 @@ export default function Addnewjob() {
                 </div>
 
                 <div>
-                    <label htmlFor="requirments" className="space-y-2">
+                    <label htmlFor="requirements" className="space-y-2">
                         <span className="leading-[25px] font-inter">Project Requirements</span>
                         <QuillNoSSRWrapper
                             theme="snow"
                             value={requirments}
-                            placeholder="Requirments"
-                            name="requirments"
+                            placeholder="Requirements"
+                            name="requirements"
                             onChange={onRequirmentsChange}
                         />
                     </label>
