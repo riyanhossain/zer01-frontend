@@ -1,10 +1,12 @@
 import Activepositions from "@/components/dashboard/positions/activepositions";
 import Addnewjob from "@/components/dashboard/positions/addnewjob";
+import { UserContext } from "@/context/userContext";
 import useAuthRoute from "@/lib/hooks/useAuthRoute";
 import React from "react";
 
 export default function Positions() {
     const [currentTab, setCurrentTab] = React.useState("active");
+    const { state, dispatch } = React.useContext(UserContext);
 
     useAuthRoute();
 
@@ -22,7 +24,9 @@ export default function Positions() {
                 </div>
 
                 <div>
-                    <button className="opacity-30 hover:opacity-100 text-white font-semibold leading-[29px] font-inter px-6 py-2 bg-addgray hover:bg-primary  active:bg-opacity-90">
+                    <button className="opacity-30 hover:opacity-100 text-white font-semibold leading-[29px] font-inter px-6 py-2 bg-addgray hover:bg-primary  active:bg-opacity-90" onClick={() => dispatch({
+                        type: "LOGOUT",
+                    })}>
                         Logout
                     </button>
                 </div>

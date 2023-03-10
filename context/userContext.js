@@ -15,12 +15,20 @@ const reducer = (state, action) => {
                 user: action.payload.user,
                 token: action.payload.token,
             };
+
+        case "LOGOUT":
+            return {
+                ...state,
+                user: null,
+                token: null,
+            };
+
         default:
             return state;
     }
 };
 
- export const UserProvider = ({ children }) => {
+export const UserProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     return <UserContext.Provider value={{ state, dispatch }}>{children}</UserContext.Provider>;
