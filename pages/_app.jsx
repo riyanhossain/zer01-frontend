@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import "react-quill/dist/quill.snow.css";
 import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
+import { UserProvider } from "@/context/userContext";
 
 const queryClient = new QueryClient();
 
@@ -27,12 +28,14 @@ export default function App({ Component, pageProps }) {
                 />
                 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" /> */}
             </Head>
-            <QueryClientProvider client={queryClient}>
-                <Toaster />
-                {!isDashRoute && <Navbar />}
-                <Component {...pageProps} />
-                {!isDashRoute && <Footer />}
-            </QueryClientProvider>
+            <UserProvider>
+                <QueryClientProvider client={queryClient}>
+                    <Toaster />
+                    {!isDashRoute && <Navbar />}
+                    <Component {...pageProps} />
+                    {!isDashRoute && <Footer />}
+                </QueryClientProvider>
+            </UserProvider>
         </>
     );
 }

@@ -1,9 +1,13 @@
 import Activepositions from "@/components/dashboard/positions/activepositions";
 import Addnewjob from "@/components/dashboard/positions/addnewjob";
+import useAuthRoute from "@/lib/hooks/useAuthRoute";
 import React from "react";
 
 export default function Positions() {
     const [currentTab, setCurrentTab] = React.useState("active");
+
+    useAuthRoute();
+
     return (
         <section className="p-5">
             {/* header */}
