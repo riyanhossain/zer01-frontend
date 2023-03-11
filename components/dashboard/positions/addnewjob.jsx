@@ -22,21 +22,21 @@ export default function Addnewjob() {
         formState: { errors },
     } = useForm({
         defaultValues: {
-            jobType: "fulltime",
-            location: "remote",
-            status: "all",
+            jobType: "Full-Time",
+            location: "Remote",
+            status: "All",
         },
     });
 
     React.useEffect(() => {
-        register("description", { required: true });
+        // register("description", { required: true });
         register("requirements", { required: true });
         register("language", { required: true });
     }, [register]);
 
-    const onDescriptionChange = (editorState) => {
-        setValue("description", editorState);
-    };
+    // const onDescriptionChange = (editorState) => {
+    //     setValue("description", editorState);
+    // };
 
     const onRequirmentsChange = (editorState) => {
         setValue("requirements", editorState);
@@ -46,18 +46,18 @@ export default function Addnewjob() {
         setValue("language", editorState);
     };
 
-    const description = watch("description");
+    // const description = watch("description");
     const requirments = watch("requirements");
     const languages = watch("language");
 
     const clearForm = () => {
         setValue("jobTitle", "");
-        setValue("jobType", "fulltime");
+        setValue("jobType", "Full-Time");
         setValue("collaborationForm", "");
         setValue("companyName", "");
         setValue("seniorityLevel", "");
-        setValue("location", "remote");
-        setValue("status", "all");
+        setValue("location", "Remote");
+        setValue("status", "All");
         setValue("description", "");
         setValue("requirements", "");
         setValue("language", "");
@@ -118,8 +118,8 @@ export default function Addnewjob() {
                             required
                             {...register("jobType")}
                         >
-                            <option value="fulltime">Full-Time</option>
-                            <option value="parttime">Part-Time</option>
+                            <option value="Full-Time">Full-Time</option>
+                            <option value="Part-Time">Part-Time</option>
                         </select>
                     </label>
                 </div>
@@ -194,9 +194,9 @@ export default function Addnewjob() {
                             required
                             {...register("location")}
                         >
-                            <option value="remote">Remote</option>
-                            <option value="onsite">On-site</option>
-                            <option value="hybrid">Hybrid</option>
+                            <option value="Remote">Remote</option>
+                            <option value="On-Site">On-site</option>
+                            <option value="Hybrid">Hybrid</option>
                         </select>
                     </label>
                 </div>
@@ -240,10 +240,10 @@ export default function Addnewjob() {
                             required
                             {...register("status")}
                         >
-                            <option value="all">All</option>
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
-                            <option value="closed">Closed</option>
+                            <option value="All">All</option>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                            <option value="Closed">Closed</option>
                         </select>
                     </label>
                 </div>
@@ -253,12 +253,14 @@ export default function Addnewjob() {
                 <div>
                     <label htmlFor="description" className="space-y-2">
                         <span className="leading-[25px] font-inter">Project Description</span>
-                        <QuillNoSSRWrapper
-                            theme="snow"
-                            value={description}
-                            placeholder="Description"
+                        <textarea
                             name="description"
-                            onChange={onDescriptionChange}
+                            id="description"
+                            className="w-full border border-[#E3E3E3] focus:border-primary outline-none leading-[25px] font-inter px-6 py-2"
+                            placeholder="Description"
+                            required
+                            rows={7}
+                            {...register("description")}
                         />
                     </label>
                 </div>
