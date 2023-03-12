@@ -11,7 +11,7 @@ export default function Latest() {
         queryFn: getAllPositions,
     });
 
-    React.useEffect(() => {}, [page, limit]);
+
 
     return (
         <section className="container mx-auto py-20 flex justify-center">

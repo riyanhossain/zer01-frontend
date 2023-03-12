@@ -1,6 +1,7 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getAllPositions } from "../../../../lib/api/position";
+import ReactPaginate from "react-paginate";
 
 export default function Positionsgrid() {
     const [page, setPage] = React.useState(1);
@@ -8,9 +9,13 @@ export default function Positionsgrid() {
     const { data } = useQuery({
         queryKey: ["positions", page, limit],
         queryFn: () => getAllPositions({ page, limit }),
-        keepPreviousData: true,
     });
 
+    const handlePageClick = (e) => {
+        setPage((page) => e.selected + 1);
+    };
+
+    console.log(data?.data)
     return (
         <section className="container mx-auto px-4 lg:px-8 xl:px-20 py-6 lg:py-12">
             <div className="p-4 lg:p-8 shadow-[0px_4px_24px_rgba(0,0,0,0.1)]">
@@ -24,7 +29,7 @@ export default function Positionsgrid() {
                 </p>
 
                 <div className="mt-8  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                    {data?.data.positions.map((position, key) => (
+                    {data?.data?.positions.map((position, key) => (
                         <div key={key} className="p-5 shadow-[0px_0px_16px_rgba(68,68,68,0.08)] bg-white ">
                             <h1 className="text-lg font-semibold font-poppins">{position.jobTitle}</h1>
                             <p className="text-sm font-semibold text-primary font-inter">{position.rate}</p>
@@ -63,19 +68,45 @@ export default function Positionsgrid() {
                 <div className="flex justify-between items-center mt-10">
                     <div className="flex items-center gap-x-3 text-sm text-[#333] font-inter">
                         <p>Show</p>
-                        <select name="" id="" className="px-4 py-1.5 border border-addwhite outline-none focus:border-primary" onChange={(e) => setLimit(Number(e.target.value))}>
+                        <select
+                            name=""
+                            id=""
+                            className="px-4 py-1.5 border border-addwhite outline-none focus:border-primary"
+                            onChange={(e) => setLimit(Number(e.target.value))}
+                        >
                             <option value="9">9</option>
                             <option value="18">18</option>
                             <option value="27">27</option>
                             <option value="36">36</option>
                         </select>
                         <p>
-                            entries <span className="text-[#717171]">1 to 10 of 430 entries</span>
+                            entries{" "}
+                            <span className="text-[#717171]">
+                                {page * limit - limit + 1} to {page * limit} of {data?.data?.totalCount} entries
+                            </span>
                         </p>
                     </div>
 
                     <div>
-                        <p>Pagination</p>
+                        {data?.data?.pageCount > 1 && (
+                            <ReactPaginate
+                                breakLabel="..."
+                                nextLabel="next"
+                                onPageChange={handlePageClick}
+                                pageRangeDisplayed={2}
+                                pageCount={data?.data.pageCount || 1}
+                                previousLabel="previous"
+                                renderOnZeroPageCount={null}
+                                className="flex justify-center items-center gap-x-2"
+                                pageLinkClassName="text-sm bg-white  border border-slate-300 dark:border-slate-800 rounded w-8 h-8 flex justify-center items-center hover:bg-primary hover:text-white "
+                                previousLinkClassName="text-sm text-gray-700 bg-white hover:bg-primary border border-slate-300  rounded w-24 h-8 flex justify-center items-center hover:bg-primary hover:text-white"
+                                nextLinkClassName="text-sm text-gray-700  bg-white hover:bg-primary  border border-slate-300 rounded w-24 h-8 flex justify-center items-center hover:bg-primary hover:text-white"
+                                breakLinkClassName="text-sm text-gray-700  bg-white dark:bg-slate-900 hover:bg-slate-200  border border-slate-300  rounded w-8 h-8 flex justify-center items-center"
+                                activeLinkClassName={
+                                    "text-sm bg-[#398378]  font-semibold  rounded w-8 h-8 flex justify-center items-center  text-white"
+                                }
+                            />
+                        )}
                     </div>
                 </div>
             </div>

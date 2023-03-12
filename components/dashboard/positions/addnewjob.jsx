@@ -171,13 +171,13 @@ export default function Addnewjob() {
 
                 <div>
                     <label htmlFor="rate" className="space-y-2">
-                        <span className="leading-[25px] font-inter">Rate</span>
+                        <span className="leading-[25px] font-inter">Monthly Salary</span>
                         <input
                             type="text"
                             name="level"
                             id="level"
                             className="w-full border border-[#E3E3E3] focus:border-primary outline-none leading-[25px] font-inter px-6 py-2"
-                            placeholder="10/h"
+                            placeholder="$400 - $500/month"
                             required
                             {...register("rate")}
                         />
