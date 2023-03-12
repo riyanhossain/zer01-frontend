@@ -1,6 +1,20 @@
 import React from "react";
 
+import { useQuery } from "@tanstack/react-query";
+import { getPositionsByActiveOrClosedStatus } from "@/lib/api/position";
+
 export default function Activepositions() {
+    const [status, setStatus] = React.useState("All");
+    const [page, setPage] = React.useState(1);
+    const [limit, setLimit] = React.useState(25);
+
+    const { data } = useQuery({
+        queryKey: ["positions", status, page, limit],
+        queryFn: () => getPositionsByActiveOrClosedStatus(status),
+    });
+
+    console.log(data?.data);
+
     return (
         <section className="px-4 py-6 border border-[#C5C3C380] grid grid-cols-[320px_1fr] gap-x-5">
             <div className="p-4 drop-shadow-[0px_4px_24px_rgba(122,122,122,0.1)] bg-white">
@@ -39,11 +53,12 @@ export default function Activepositions() {
                             <select
                                 name="options"
                                 className="w-full font-poppins text-[#2C2E3E] text-sm font-medium border border-[#E3E3E3] mt-1  p-2 outline-none focus:border-primary"
+                                onChange={(e) => setStatus(e.target.value)}
                             >
-                                <option value="all">All</option>
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
-                                <option value="closed">Closed</option>
+                                <option value="All">All</option>
+                                <option value="Active">Active</option>
+                                {/* <option value="inactive">Inactive</option> */}
+                                <option value="Closed">Closed</option>
                             </select>
                         </label>
                     </div>
@@ -69,46 +84,47 @@ export default function Activepositions() {
                     <div className=" font-poppins font-medium text-sm bg-white py-3.5 text-center">Actions</div>
                 </div>
 
-                <div className="grid grid-cols-[8%_12%_15%_18%_15%_32%] pt-3">
-                    <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">1</div>
-                    <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">Z01-DRAD23</div>
-                    <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">Java Developer</div>
-                    <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">B2B - SRL/PFA</div>
-                    <div className=" font-poppins font-medium text-sm py-3 text-center bg-primary">Active</div>
-                    <div className=" font-poppins font-medium text-sm bg-white  p-1 flex justify-around items-center">
-                        <button className="bg-primary text-white font-inter font-semibold  py-2 px-8 hover:bg-opacity-80 active:bg-opacity-90">
-                            Edit
-                        </button>
+                {
+                    // map through the data
+                    data?.data?.positions?.map((position, key) => (
+                        <div key={key} className="grid grid-cols-[8%_12%_15%_18%_15%_32%] pt-3">
+                            <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">{key + 1}</div>
+                            <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">
+                                {position._id.slice(0, 6) + "..." + position._id.slice(-6)}
+                            </div>
+                            <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">
+                                {position.jobTitle}
+                            </div>
+                            <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">
+                                {position.collaborationForm}
+                            </div>
+                            {position.status === "Active" ? (
+                                <div className=" font-poppins font-medium text-sm py-3 text-center bg-primary">Active</div>
+                            ) : (
+                                <div className=" font-poppins font-medium text-sm py-3 text-center bg-[#E1E1E180] ">Closed</div>
+                            )}
+                            <div className=" font-poppins font-medium text-sm bg-white  p-1 flex justify-around items-center">
+                                <button className="bg-primary text-white font-inter font-semibold  py-2 px-8 hover:bg-opacity-80 active:bg-opacity-90">
+                                    Edit
+                                </button>
 
-                        <button className="bg-[#FF0000] text-white font-inter font-semibold py-2 px-6 hover:bg-opacity-80 active:bg-opacity-90">
-                            Delete
-                        </button>
+                                <button className="bg-[#FF0000] text-white font-inter font-semibold py-2 px-6 hover:bg-opacity-80 active:bg-opacity-90">
+                                    Delete
+                                </button>
 
-                        <button className="bg-[#102307] text-white font-inter font-semibold py-2 px-2 hover:bg-opacity-80 active:bg-opacity-90">
-                            Close Position
-                        </button>
-                    </div>
-                </div>
-                <div className="grid grid-cols-[8%_12%_15%_18%_15%_32%] pt-3">
-                    <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">2</div>
-                    <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">Z01-DRAD23</div>
-                    <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">Java Developer</div>
-                    <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">B2B - SRL/PFA</div>
-                    <div className=" font-poppins font-medium text-sm py-3 text-center bg-[#E1E1E1] ">Closed</div>
-                    <div className=" font-poppins font-medium text-sm bg-white  p-1 flex justify-around items-center">
-                        <button className="bg-primary text-white font-inter font-semibold  py-2 px-8 hover:bg-opacity-80 active:bg-opacity-90">
-                            Edit
-                        </button>
-
-                        <button className="bg-[#FF0000] text-white font-inter font-semibold py-2 px-6 hover:bg-opacity-80 active:bg-opacity-90">
-                            Delete
-                        </button>
-
-                        <button className=" bg-secondary text-white font-inter font-semibold py-2 px-[30px] hover:bg-opacity-80 active:bg-opacity-90">
-                            Reopen
-                        </button>
-                    </div>
-                </div>
+                                {position.status === "Active" ? (
+                                    <button className="bg-[#102307] text-white font-inter font-semibold py-2 px-2 hover:bg-opacity-80 active:bg-opacity-90">
+                                        Close Position
+                                    </button>
+                                ) : (
+                                    <button className=" bg-secondary text-white font-inter font-semibold py-2 px-[30px] hover:bg-opacity-80 active:bg-opacity-90">
+                                        Reopen
+                                    </button>
+                                )}
+                            </div>
+                        </div>
+                    ))
+                }
             </div>
         </section>
     );

@@ -24,7 +24,7 @@ export default function Addnewjob() {
         defaultValues: {
             jobType: "Full-Time",
             location: "Remote",
-            status: "All",
+            status: "Active",
         },
     });
 
@@ -57,7 +57,7 @@ export default function Addnewjob() {
         setValue("companyName", "");
         setValue("seniorityLevel", "");
         setValue("location", "Remote");
-        setValue("status", "All");
+        setValue("status", "Active");
         setValue("description", "");
         setValue("requirements", "");
         setValue("language", "");
@@ -240,7 +240,7 @@ export default function Addnewjob() {
                             required
                             {...register("status")}
                         >
-                            <option value="All">All</option>
+                            {/* <option value="All">All</option> */}
                             <option value="Active">Active</option>
                             <option value="Inactive">Inactive</option>
                             <option value="Closed">Closed</option>

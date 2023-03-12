@@ -51,8 +51,8 @@ export default function Positions() {
             </div>
 
             {/* tabs */}
-            {/* <Activepositions /> */}
-            <Addnewjob />
+            <Activepositions />
+            {/* <Addnewjob /> */}
         </section>
     );
 }
