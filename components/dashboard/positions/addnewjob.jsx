@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { createPosition } from "../../../lib/api/position";
+import { createPosition } from "@/lib/api/position";
 
 const QuillNoSSRWrapper = dynamic(import("react-quill"), {
     ssr: false,
@@ -299,8 +299,9 @@ export default function Addnewjob() {
                         </button>
 
                         <button
+                            type="button"
                             className="bg-addgray text-white px-6 py-2 font-inter text-sm font-medium hover:bg-opacity-80"
-                            onClick={() => router("/dashboard/positions")}
+                            onClick={() => router.push("/dashboard/positions")}
                         >
                             Close
                         </button>

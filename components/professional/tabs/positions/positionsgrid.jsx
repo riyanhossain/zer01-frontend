@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getAllPositions } from "../../../../lib/api/position";
+import { getAllPositions } from "@/lib/api/position";
 import ReactPaginate from "react-paginate";
 
 export default function Positionsgrid() {
@@ -15,7 +15,7 @@ export default function Positionsgrid() {
         setPage((page) => e.selected + 1);
     };
 
-    console.log(data?.data)
+    console.log(data?.data);
     return (
         <section className="container mx-auto px-4 lg:px-8 xl:px-20 py-6 lg:py-12">
             <div className="p-4 lg:p-8 shadow-[0px_4px_24px_rgba(0,0,0,0.1)]">
@@ -98,7 +98,7 @@ export default function Positionsgrid() {
                                 previousLabel="previous"
                                 renderOnZeroPageCount={null}
                                 className="flex justify-center items-center gap-x-2"
-                                pageLinkClassName="text-sm bg-white  border border-slate-300 dark:border-slate-800 rounded w-8 h-8 flex justify-center items-center hover:bg-primary hover:text-white "
+                                pageLinkClassName="text-sm bg-primary  border border-slate-300 dark:border-slate-800 rounded w-8 h-8 flex justify-center items-center hover:bg-primary hover:text-white "
                                 previousLinkClassName="text-sm text-gray-700 bg-white hover:bg-primary border border-slate-300  rounded w-24 h-8 flex justify-center items-center hover:bg-primary hover:text-white"
                                 nextLinkClassName="text-sm text-gray-700  bg-white hover:bg-primary  border border-slate-300 rounded w-24 h-8 flex justify-center items-center hover:bg-primary hover:text-white"
                                 breakLinkClassName="text-sm text-gray-700  bg-white dark:bg-slate-900 hover:bg-slate-200  border border-slate-300  rounded w-8 h-8 flex justify-center items-center"

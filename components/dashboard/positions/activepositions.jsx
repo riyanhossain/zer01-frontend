@@ -1,9 +1,11 @@
 import React from "react";
-
-import { useQuery } from "@tanstack/react-query";
-import { getPositionsByActiveOrClosedStatus } from "@/lib/api/position";
+import toast from "react-hot-toast";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { getPositionsByActiveOrClosedStatus, deletePosition } from "@/lib/api/position";
+import ReactPaginate from "react-paginate";
 
 export default function Activepositions() {
+    const queryClient = useQueryClient();
     const [status, setStatus] = React.useState("All");
     const [page, setPage] = React.useState(1);
     const [limit, setLimit] = React.useState(25);
@@ -13,7 +15,21 @@ export default function Activepositions() {
         queryFn: () => getPositionsByActiveOrClosedStatus(status),
     });
 
-    console.log(data?.data);
+    const handlePageClick = (e) => {
+        setPage((page) => e.selected + 1);
+    };
+
+    const mutation = useMutation({
+        mutationFn: deletePosition,
+        onSuccess: (data) => {
+            queryClient.invalidateQueries("positions");
+            toast.success(data?.data.message);
+        },
+    });
+
+    const handleDelete = (id) => {
+        mutation.mutate(id);
+    };
 
     return (
         <section className="px-4 py-6 border border-[#C5C3C380] grid grid-cols-[320px_1fr] gap-x-5">
@@ -74,57 +90,108 @@ export default function Activepositions() {
             </div>
 
             {/* table */}
-            <div className="p-3 bg-[#D9D9D9]">
-                <div className="grid grid-cols-[8%_12%_15%_18%_15%_32%] ">
-                    <div className=" font-poppins font-medium text-sm bg-white py-3.5 text-center border-r border-[#D9D5D5]">Nr.</div>
-                    <div className=" font-poppins font-medium text-sm bg-white py-3.5 text-center border-r border-[#D9D5D5]">ID</div>
-                    <div className=" font-poppins font-medium text-sm bg-white py-3.5 text-center border-r border-[#D9D5D5]">Job name</div>
-                    <div className=" font-poppins font-medium text-sm bg-white py-3.5 text-center border-r border-[#D9D5D5]">Collaboration form</div>
-                    <div className=" font-poppins font-medium text-sm bg-white py-3.5 text-center border-r border-[#D9D5D5]">Status</div>
-                    <div className=" font-poppins font-medium text-sm bg-white py-3.5 text-center">Actions</div>
-                </div>
-
-                {
-                    // map through the data
-                    data?.data?.positions?.map((position, key) => (
-                        <div key={key} className="grid grid-cols-[8%_12%_15%_18%_15%_32%] pt-3">
-                            <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">{key + 1}</div>
-                            <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">
-                                {position._id.slice(0, 6) + "..." + position._id.slice(-6)}
-                            </div>
-                            <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">
-                                {position.jobTitle}
-                            </div>
-                            <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">
-                                {position.collaborationForm}
-                            </div>
-                            {position.status === "Active" ? (
-                                <div className=" font-poppins font-medium text-sm py-3 text-center bg-primary">Active</div>
-                            ) : (
-                                <div className=" font-poppins font-medium text-sm py-3 text-center bg-[#E1E1E180] ">Closed</div>
-                            )}
-                            <div className=" font-poppins font-medium text-sm bg-white  p-1 flex justify-around items-center">
-                                <button className="bg-primary text-white font-inter font-semibold  py-2 px-8 hover:bg-opacity-80 active:bg-opacity-90">
-                                    Edit
-                                </button>
-
-                                <button className="bg-[#FF0000] text-white font-inter font-semibold py-2 px-6 hover:bg-opacity-80 active:bg-opacity-90">
-                                    Delete
-                                </button>
-
-                                {position.status === "Active" ? (
-                                    <button className="bg-[#102307] text-white font-inter font-semibold py-2 px-2 hover:bg-opacity-80 active:bg-opacity-90">
-                                        Close Position
-                                    </button>
-                                ) : (
-                                    <button className=" bg-secondary text-white font-inter font-semibold py-2 px-[30px] hover:bg-opacity-80 active:bg-opacity-90">
-                                        Reopen
-                                    </button>
-                                )}
-                            </div>
+            <div>
+                <div className="p-3 bg-[#D9D9D9]">
+                    <div className="grid grid-cols-[8%_12%_15%_18%_15%_32%] ">
+                        <div className=" font-poppins font-medium text-sm bg-white py-3.5 text-center border-r border-[#D9D5D5]">Nr.</div>
+                        <div className=" font-poppins font-medium text-sm bg-white py-3.5 text-center border-r border-[#D9D5D5]">ID</div>
+                        <div className=" font-poppins font-medium text-sm bg-white py-3.5 text-center border-r border-[#D9D5D5]">Job name</div>
+                        <div className=" font-poppins font-medium text-sm bg-white py-3.5 text-center border-r border-[#D9D5D5]">
+                            Collaboration form
                         </div>
-                    ))
-                }
+                        <div className=" font-poppins font-medium text-sm bg-white py-3.5 text-center border-r border-[#D9D5D5]">Status</div>
+                        <div className=" font-poppins font-medium text-sm bg-white py-3.5 text-center">Actions</div>
+                    </div>
+
+                    {
+                        // map through the data
+                        data?.data?.positions?.map((position, key) => (
+                            <div key={key} className="grid grid-cols-[8%_12%_15%_18%_15%_32%] pt-3">
+                                <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">{key + 1}</div>
+                                <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">
+                                    {position._id.slice(0, 6) + "..." + position._id.slice(-6)}
+                                </div>
+                                <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">
+                                    {position.jobTitle}
+                                </div>
+                                <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">
+                                    {position.collaborationForm}
+                                </div>
+                                {position.status === "Active" ? (
+                                    <div className=" font-poppins font-medium text-sm py-3 text-center bg-primary">Active</div>
+                                ) : (
+                                    <div className=" font-poppins font-medium text-sm py-3 text-center bg-[#E1E1E180] ">Closed</div>
+                                )}
+                                <div className=" font-poppins font-medium text-sm bg-white  p-1 flex justify-around items-center">
+                                    <button className="bg-primary text-white font-inter font-semibold  py-2 px-8 hover:bg-opacity-80 active:bg-opacity-90">
+                                        Edit
+                                    </button>
+
+                                    <button
+                                        className="bg-[#FF0000] text-white font-inter font-semibold py-2 px-6 hover:bg-opacity-80 active:bg-opacity-90"
+                                        onClick={() => handleDelete(position._id)}
+                                    >
+                                        Delete
+                                    </button>
+
+                                    {position.status === "Active" ? (
+                                        <button className="bg-[#102307] text-white font-inter font-semibold py-2 px-2 hover:bg-opacity-80 active:bg-opacity-90">
+                                            Close Position
+                                        </button>
+                                    ) : (
+                                        <button className=" bg-secondary text-white font-inter font-semibold py-2 px-[30px] hover:bg-opacity-80 active:bg-opacity-90">
+                                            Reopen
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+                <div className="flex justify-between items-center mt-10">
+                    <div className="flex items-center gap-x-3 text-sm text-[#333] font-inter">
+                        <p>Show</p>
+                        <select
+                            name=""
+                            id=""
+                            className="px-4 py-1.5 border border-addwhite outline-none focus:border-primary"
+                            onChange={(e) => setLimit(Number(e.target.value))}
+                        >
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="75">75</option>
+                            <option value="100">100</option>
+                        </select>
+                        <p>
+                            entries{" "}
+                            <span className="text-[#717171]">
+                                {page * limit - limit + 1} to {page * limit} of {data?.data?.totalCount} entries
+                            </span>
+                        </p>
+                    </div>
+
+                    <div>
+                        {data?.data?.pageCount > 1 && (
+                            <ReactPaginate
+                                breakLabel="..."
+                                nextLabel="next"
+                                onPageChange={handlePageClick}
+                                pageRangeDisplayed={2}
+                                pageCount={data?.data.pageCount || 1}
+                                previousLabel="previous"
+                                renderOnZeroPageCount={null}
+                                className="flex justify-center items-center gap-x-2"
+                                pageLinkClassName="text-sm bg-primary  border border-slate-300 dark:border-slate-800 rounded w-8 h-8 flex justify-center items-center hover:bg-primary hover:text-white "
+                                previousLinkClassName="text-sm text-gray-700 bg-white hover:bg-primary border border-slate-300  rounded w-24 h-8 flex justify-center items-center hover:bg-primary hover:text-white"
+                                nextLinkClassName="text-sm text-gray-700  bg-white hover:bg-primary  border border-slate-300 rounded w-24 h-8 flex justify-center items-center hover:bg-primary hover:text-white"
+                                breakLinkClassName="text-sm text-gray-700  bg-white dark:bg-slate-900 hover:bg-slate-200  border border-slate-300  rounded w-8 h-8 flex justify-center items-center"
+                                activeLinkClassName={
+                                    "text-sm bg-[#398378]  font-semibold  rounded w-8 h-8 flex justify-center items-center  text-white"
+                                }
+                            />
+                        )}
+                    </div>
+                </div>
             </div>
         </section>
     );

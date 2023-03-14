@@ -7,9 +7,7 @@ const useAuthRoute = () => {
     const router = useRouter();
 
     React.useEffect(() => {
-        if (state.user && state.token) {
-            router.push("/dashboard/positions", undefined, { shallow: true });
-        } else {
+        if (!state.user && !state.token) {
             router.push("/login");
         }
     }, [state.user]);

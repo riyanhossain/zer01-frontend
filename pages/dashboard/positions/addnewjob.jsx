@@ -1,11 +1,10 @@
-import Activepositions from "@/components/dashboard/positions/activepositions";
 import Addnewjob from "@/components/dashboard/positions/addnewjob";
 import { UserContext } from "@/context/userContext";
 import useAuthRoute from "@/lib/hooks/useAuthRoute";
 import React from "react";
 import { useRouter } from "next/router";
 
-export default function Positions() {
+export default function AddNewJob() {
     const [currentTab, setCurrentTab] = React.useState("active");
     const { state, dispatch } = React.useContext(UserContext);
 
@@ -43,17 +42,23 @@ export default function Positions() {
             {/* second header */}
             <div className="px-4 py-6 flex items-center justify-between">
                 <div className="space-x-4">
-                    <button className="text-white font-semibold leading-[29px] font-inter px-6 py-2 bg-primary hover:bg-opacity-80 active:bg-opacity-90">
+                    <button
+                        className="opacity-30 hover:opacity-100 text-white font-semibold leading-[29px] font-inter px-6 py-2 bg-addgray hover:bg-primary  active:bg-opacity-90"
+                        onClick={() => router.push("/dashboard/positions")}
+                    >
                         Active/Closed Positions
                     </button>
-                    <button className="opacity-30 hover:opacity-100 text-white font-semibold leading-[29px] font-inter px-6 py-2 bg-addgray hover:bg-primary  active:bg-opacity-90">
+                    <button
+                        className="opacity-30 hover:opacity-100 text-white font-semibold leading-[29px] font-inter px-6 py-2 bg-addgray hover:bg-primary  active:bg-opacity-90"
+                        onClick={() => router.push("/dashboard/positions")}
+                    >
                         Inactive positions
                     </button>
                 </div>
 
                 <div>
                     <button
-                        className="opacity-30 hover:opacity-100 text-white font-semibold leading-[29px] font-inter px-6 py-2 bg-addgray hover:bg-primary  active:bg-opacity-90"
+                        className="text-white font-semibold leading-[29px] font-inter px-6 py-2  hover:bg-opacity-80 active:bg-opacity-90"
                         onClick={() => router.push("/dashboard/positions/addnewjob")}
                     >
                         Add new job
@@ -62,7 +67,7 @@ export default function Positions() {
             </div>
 
             {/* tabs */}
-            <Activepositions />
+            <Addnewjob />
         </section>
     );
 }
