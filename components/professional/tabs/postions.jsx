@@ -4,5 +4,10 @@ import Positionsgrid from "./positions/positionsgrid";
 
 export default function Postions() {
     const [detailsMode, setDetailsMode] = React.useState(false);
-    return detailsMode ? <Details /> : <Positionsgrid />;
+    const [positionId, setPositionId] = React.useState(null);
+    return detailsMode ? (
+        <Details setDetailsMode={setDetailsMode} setPositionId={setPositionId} positionId={positionId} />
+    ) : (
+        <Positionsgrid setDetailsMode={setDetailsMode} setPositionId={setPositionId} />
+    );
 }

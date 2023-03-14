@@ -1,7 +1,7 @@
 import React from "react";
 import toast from "react-hot-toast";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getPositionsByActiveOrClosedStatus, deletePosition } from "@/lib/api/position";
+import { getPositionsByActiveOrClosedStatus, deletePosition, changePositionStatus } from "@/lib/api/position";
 import ReactPaginate from "react-paginate";
 
 export default function Activepositions() {
@@ -25,10 +25,28 @@ export default function Activepositions() {
             queryClient.invalidateQueries("positions");
             toast.success(data?.data.message);
         },
+        onError: (error) => {
+            toast.error(error?.response?.data?.message);
+        },
     });
 
     const handleDelete = (id) => {
         mutation.mutate(id);
+    };
+
+    const statusMutation = useMutation({
+        mutationFn: changePositionStatus,
+        onSuccess: (data) => {
+            queryClient.invalidateQueries("positions");
+            toast.success(data?.data.message);
+        },
+    });
+
+    const handleStatus = (positionId, status) => {
+        statusMutation.mutate({
+            positionId,
+            status,
+        });
     };
 
     return (
@@ -135,11 +153,17 @@ export default function Activepositions() {
                                     </button>
 
                                     {position.status === "Active" ? (
-                                        <button className="bg-[#102307] text-white font-inter font-semibold py-2 px-2 hover:bg-opacity-80 active:bg-opacity-90">
+                                        <button
+                                            className="bg-[#102307] text-white font-inter font-semibold py-2 px-2 hover:bg-opacity-80 active:bg-opacity-90"
+                                            onClick={() => handleStatus(position._id, "Closed")}
+                                        >
                                             Close Position
                                         </button>
                                     ) : (
-                                        <button className=" bg-secondary text-white font-inter font-semibold py-2 px-[30px] hover:bg-opacity-80 active:bg-opacity-90">
+                                        <button
+                                            className=" bg-secondary text-white font-inter font-semibold py-2 px-[30px] hover:bg-opacity-80 active:bg-opacity-90"
+                                            onClick={() => handleStatus(position._id, "Active")}
+                                        >
                                             Reopen
                                         </button>
                                     )}

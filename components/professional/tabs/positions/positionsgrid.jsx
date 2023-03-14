@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getAllPositions } from "@/lib/api/position";
 import ReactPaginate from "react-paginate";
 
-export default function Positionsgrid() {
+export default function Positionsgrid({ setDetailsMode, setPositionId }) {
     const [page, setPage] = React.useState(1);
     const [limit, setLimit] = React.useState(9);
     const { data } = useQuery({
@@ -12,10 +12,9 @@ export default function Positionsgrid() {
     });
 
     const handlePageClick = (e) => {
-        setPage((page) => e.selected + 1);
+        setPage(e.selected + 1);
     };
 
-    console.log(data?.data);
     return (
         <section className="container mx-auto px-4 lg:px-8 xl:px-20 py-6 lg:py-12">
             <div className="p-4 lg:p-8 shadow-[0px_4px_24px_rgba(0,0,0,0.1)]">
@@ -58,9 +57,27 @@ export default function Positionsgrid() {
                                 <hr className="border-[#E7E7E7]" />
                             </div>
 
-                            <button className="w-full bg-primary text-white font-inter font-semibold text-sm px-6 py-2 hover:bg-opacity-80 active:bg-opacity-90">
-                                View Detail
-                            </button>
+                            {position.status === "Active" ? (
+                                <button
+                                    className="w-full bg-primary text-white font-inter font-semibold text-sm px-6 py-2 hover:bg-opacity-80 active:bg-opacity-90"
+                                    onClick={() => {
+                                        setDetailsMode(true);
+                                        setPositionId(position._id);
+                                    }}
+                                >
+                                    View Detail
+                                </button>
+                            ) : (
+                                <button
+                                    className="w-full bg-addgray text-white font-inter font-semibold text-sm px-6 py-2 hover:bg-opacity-80 active:bg-opacity-90"
+                                    onClick={() => {
+                                        setDetailsMode(true);
+                                        setPositionId(position._id);
+                                    }}
+                                >
+                                    Closed
+                                </button>
+                            )}
                         </div>
                     ))}
                 </div>
