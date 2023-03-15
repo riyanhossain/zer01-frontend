@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getPositionsByActiveOrClosedStatus, deletePosition, changePositionStatus } from "@/lib/api/position";
 import ReactPaginate from "react-paginate";
+import { useRouter } from "next/router";
 
 export default function Activepositions() {
     const queryClient = useQueryClient();
@@ -48,6 +49,8 @@ export default function Activepositions() {
             status,
         });
     };
+
+    const router = useRouter();
 
     return (
         <section className="px-4 py-6 border border-[#C5C3C380] grid grid-cols-[320px_1fr] gap-x-5">
@@ -141,7 +144,9 @@ export default function Activepositions() {
                                     <div className=" font-poppins font-medium text-sm py-3 text-center bg-[#E1E1E180] ">Closed</div>
                                 )}
                                 <div className=" font-poppins font-medium text-sm bg-white  p-1 flex justify-around items-center">
-                                    <button className="bg-primary text-white font-inter font-semibold  py-2 px-8 hover:bg-opacity-80 active:bg-opacity-90">
+                                    <button className="bg-primary text-white font-inter font-semibold  py-2 px-8 hover:bg-opacity-80 active:bg-opacity-90"
+                                    onClick={() => router.push(`/dashboard/positions/edit/${position._id}`)}
+                                    >
                                         Edit
                                     </button>
 

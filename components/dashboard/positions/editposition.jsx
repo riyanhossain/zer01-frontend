@@ -2,17 +2,25 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { createPosition } from "@/lib/api/position";
+import { createPosition, editPosition, getSinglePositionById } from "@/lib/api/position";
 
 const QuillNoSSRWrapper = dynamic(import("react-quill"), {
     ssr: false,
     loading: () => <p>Loading ...</p>,
 });
 
-export default function Addnewjob() {
+export default function EditPosition() {
     const queryClient = useQueryClient();
+
+    const { id } = useRouter().query;
+
+    const { data } = useQuery({
+        queryKey: ["position", id],
+        queryFn: async () => await getSinglePositionById(id),
+    });
+
     const router = useRouter();
     const {
         register,
@@ -22,11 +30,25 @@ export default function Addnewjob() {
         formState: { errors },
     } = useForm({
         defaultValues: {
-            jobType: "Full-Time",
-            location: "Remote",
-            status: "Active",
+            ...data?.data?.position,
         },
     });
+
+    React.useEffect(() => {
+        setValue("jobTitle", data?.data?.position?.jobTitle);
+        setValue("jobType", data?.data?.position?.jobType);
+        setValue("collaborationForm", data?.data?.position?.collaborationForm);
+        setValue("companyName", data?.data?.position?.companyName);
+        setValue("seniorityLevel", data?.data?.position?.seniorityLevel);
+        setValue("location", data?.data?.position?.location);
+        setValue("status", data?.data?.position?.status);
+        setValue("description", data?.data?.position?.description);
+        setValue("requirements", data?.data?.position?.requirements);
+        setValue("language", data?.data?.position?.language);
+        setValue("rate", data?.data?.position?.rate);
+        setValue("startDate", data?.data?.position?.startDate);
+        setValue("endDate", data?.data?.position?.endDate);
+    }, [data]);
 
     React.useEffect(() => {
         // register("description", { required: true });
@@ -68,14 +90,14 @@ export default function Addnewjob() {
 
     // Mutations
     const mutation = useMutation({
-        mutationFn: createPosition,
+        mutationFn: editPosition,
         onSuccess: (data) => {
             // Invalidate and refetch
-            queryClient.invalidateQueries({ queryKey: ["positions"] });
+            queryClient.invalidateQueries({ queryKey: ["position", "positions"] });
 
             toast.success(data?.data.message);
 
-            clearForm();
+            // clearForm();
         },
         onError: (error) => {
             toast.error(error?.response?.data?.message);
@@ -84,7 +106,10 @@ export default function Addnewjob() {
 
     const onSubmit = (data) => {
         // errors && toast.error(errors.root.message);
-        mutation.mutate(data);
+        mutation.mutate({
+            positionId: id,
+            data,
+        });
     };
 
     return (

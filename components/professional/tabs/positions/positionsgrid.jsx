@@ -70,11 +70,11 @@ export default function Positionsgrid({ setDetailsMode, setPositionId }) {
                             ) : (
                                 <button
                                     className="w-full bg-addgray text-white font-inter font-semibold text-sm px-6 py-2 hover:bg-opacity-80 active:bg-opacity-90"
-                                    onClick={() => {
-                                        setDetailsMode(true);
-                                        setPositionId(position._id);
-                                    }}
-                                >
+                                    // onClick={() => {
+                                    //     setDetailsMode(true);
+                                    //     setPositionId(position._id);
+                                    // }}
+                                 >
                                     Closed
                                 </button>
                             )}
