@@ -19,7 +19,7 @@ export default function Latest() {
                 <h1 className="text-center text-[32px] leading-[42px] font-poppins font-semibold">Latest open positions</h1>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 ">
-                    {data?.data.positions.slice(0, 3).map((position, key) => (
+                    {data?.data?.positions?.slice(0, 3).map((position, key) => (
                         <div key={key} className="p-5 shadow-[0px_0px_16px_rgba(68,68,68,0.08)] bg-white border-b-2 border-addgray">
                             <h1 className="text-lg font-semibold font-poppins">{position.jobTitle}</h1>
                             <p className="text-sm font-semibold text-primary font-inter">{position.rate}</p>
