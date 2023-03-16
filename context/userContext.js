@@ -5,6 +5,7 @@ export const UserContext = createContext();
 const initialState = {
     user: null,
     token: null,
+    currentTab: "active",
 };
 
 const reducer = (state, action) => {
@@ -21,6 +22,11 @@ const reducer = (state, action) => {
                 ...state,
                 user: null,
                 token: null,
+            };
+        case "SET_CURRENT_TAB":
+            return {
+                ...state,
+                currentTab: action.payload,
             };
 
         default:

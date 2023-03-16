@@ -1,21 +1,21 @@
 import React from "react";
 import toast from "react-hot-toast";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getPositionsByActiveOrClosedStatus, deletePosition, changePositionStatus } from "@/lib/api/position";
+import { changePositionStatus, deletePosition, getPositionsByInactiveStatus } from "@/lib/api/position";
 import ReactPaginate from "react-paginate";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
-export default function Activepositions() {
+export default function Inactivepositions() {
     const queryClient = useQueryClient();
-    const [status, setStatus] = React.useState("All");
+    // const [price, setPrice] = React.useState("");
     const [Keywords, setKeywords] = React.useState("");
     const [page, setPage] = React.useState(1);
     const [limit, setLimit] = React.useState(25);
 
     const { data } = useQuery({
-        queryKey: ["positions", status, page, limit, Keywords],
-        queryFn: () => getPositionsByActiveOrClosedStatus({ status, search: Keywords }),
+        queryKey: ["positions", page, limit, Keywords],
+        queryFn: () => getPositionsByInactiveStatus({ search: Keywords }),
     });
 
     const handlePageClick = (e) => {
@@ -48,15 +48,15 @@ export default function Activepositions() {
     const { register, handleSubmit, watch, setValue } = useForm();
 
     const onFilter = (data) => {
-        setStatus(data.options);
+        // setPrice(data.price);
         setKeywords(data.search);
     };
 
     const clearFilter = () => {
-        setStatus("All");
+        // setPrice("");
         setKeywords("");
         setValue("search", "");
-        setValue("options", "All");
+        // setValue("price", "");
     };
 
     const handleStatusChange = (positionId, status) => {
@@ -99,22 +99,20 @@ export default function Activepositions() {
                         </label>
                     </div>
 
-                    <div className="py-3">
-                        <label htmlFor="options">
-                            <span className="text-lg font-poppins text-[#464646] font-medium">Status</span>
-                            <select
-                                name="options"
-                                className="w-full font-poppins text-[#2C2E3E] text-sm font-medium border border-[#E3E3E3] mt-1  p-2 outline-none focus:border-primary"
-                                {...register("options")}
-                                value={watch("options")}
-                            >
-                                <option value="All">All</option>
-                                <option value="Active">Active</option>
-                                {/* <option value="inactive">Inactive</option> */}
-                                <option value="Closed">Closed</option>
-                            </select>
+                    {/* <div className="py-3">
+                        <label htmlFor="price">
+                            <span className="text-lg font-poppins text-[#464646] font-medium">Price</span>
+                            <input
+                                type="number"
+                                name="price"
+                                id="price"
+                                value={watch("price")}
+                                className="w-full border border-[#E3E3E3] mt-1  p-2 outline-none focus:border-primary"
+                                placeholder="Price"
+                                {...register("price")}
+                            />
                         </label>
-                    </div>
+                    </div> */}
 
                     {/* submit button */}
 
@@ -138,9 +136,9 @@ export default function Activepositions() {
                         <div className=" font-poppins font-medium text-sm bg-white py-3.5 text-center border-r border-[#D9D5D5]">ID</div>
                         <div className=" font-poppins font-medium text-sm bg-white py-3.5 text-center border-r border-[#D9D5D5]">Job name</div>
                         <div className=" font-poppins font-medium text-sm bg-white py-3.5 text-center border-r border-[#D9D5D5]">
-                            Collaboration form
+                            Latest modification
                         </div>
-                        <div className=" font-poppins font-medium text-sm bg-white py-3.5 text-center border-r border-[#D9D5D5]">Status</div>
+                        <div className=" font-poppins font-medium text-sm bg-white py-3.5 text-center border-r border-[#D9D5D5]">Company Name</div>
                         <div className=" font-poppins font-medium text-sm bg-white py-3.5 text-center">Actions</div>
                     </div>
 
@@ -156,13 +154,13 @@ export default function Activepositions() {
                                     {position.jobTitle}
                                 </div>
                                 <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">
-                                    {position.collaborationForm}
+                                    {position.updatedAt.slice(0, 10)}
                                 </div>
-                                {position.status === "Active" ? (
-                                    <div className=" font-poppins font-medium text-sm py-3 text-center bg-primary">Active</div>
-                                ) : (
-                                    <div className=" font-poppins font-medium text-sm py-3 text-center bg-[#E1E1E180] ">Closed</div>
-                                )}
+
+                                <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">
+                                    {position.companyName}
+                                </div>
+
                                 <div className=" font-poppins font-medium text-sm bg-white  p-1 flex justify-around items-center">
                                     <button
                                         className="bg-primary text-white font-inter font-semibold  py-2 px-8 hover:bg-opacity-80 active:bg-opacity-90"
@@ -178,21 +176,12 @@ export default function Activepositions() {
                                         Delete
                                     </button>
 
-                                    {position.status === "Active" ? (
-                                        <button
-                                            className="bg-[#102307] text-white font-inter font-semibold py-2 px-2 hover:bg-opacity-80 active:bg-opacity-90"
-                                            onClick={() => handleStatusChange(position._id, "Closed")}
-                                        >
-                                            Close Position
-                                        </button>
-                                    ) : (
-                                        <button
-                                            className=" bg-secondary text-white font-inter font-semibold py-2 px-[30px] hover:bg-opacity-80 active:bg-opacity-90"
-                                            onClick={() => handleStatusChange(position._id, "Active")}
-                                        >
-                                            Reopen
-                                        </button>
-                                    )}
+                                    <button
+                                        className=" bg-secondary text-white font-inter font-semibold py-2 px-[10px] hover:bg-opacity-80 active:bg-opacity-90"
+                                        onClick={() => handleStatusChange(position._id, "Active")}
+                                    >
+                                        Post Position
+                                    </button>
                                 </div>
                             </div>
                         ))
