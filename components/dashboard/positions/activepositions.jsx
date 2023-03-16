@@ -4,16 +4,18 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getPositionsByActiveOrClosedStatus, deletePosition, changePositionStatus } from "@/lib/api/position";
 import ReactPaginate from "react-paginate";
 import { useRouter } from "next/router";
+import { useForm } from "react-hook-form";
 
 export default function Activepositions() {
     const queryClient = useQueryClient();
     const [status, setStatus] = React.useState("All");
+    const [Keywords, setKeywords] = React.useState("");
     const [page, setPage] = React.useState(1);
     const [limit, setLimit] = React.useState(25);
 
     const { data } = useQuery({
-        queryKey: ["positions", status, page, limit],
-        queryFn: () => getPositionsByActiveOrClosedStatus(status),
+        queryKey: ["positions", status, page, limit, Keywords],
+        queryFn: () => getPositionsByActiveOrClosedStatus({ status, search: Keywords }),
     });
 
     const handlePageClick = (e) => {
@@ -43,11 +45,18 @@ export default function Activepositions() {
         },
     });
 
-    const handleStatus = (positionId, status) => {
-        statusMutation.mutate({
-            positionId,
-            status,
-        });
+    const { register, handleSubmit, watch, setValue } = useForm();
+
+    const onFilter = (data) => {
+        setStatus(data.options);
+        setKeywords(data.search);
+    };
+
+    const clearFilter = () => {
+        setStatus("All");
+        setKeywords("");
+        setValue("search", "");
+        setValue("options", "All");
     };
 
     const router = useRouter();
@@ -70,7 +79,7 @@ export default function Activepositions() {
                     <span className="font-poppins text-lg text-primary">Filter</span>
                 </div>
 
-                <form className=" space-y-3">
+                <form className=" space-y-3" onSubmit={handleSubmit(onFilter)}>
                     <div className="py-3  border-b border-[#C7C7C7]">
                         <label htmlFor="search">
                             <span className="text-lg font-poppins text-[#464646] font-medium">Search</span>
@@ -78,8 +87,10 @@ export default function Activepositions() {
                                 type="search"
                                 name="search"
                                 id="search"
+                                value={watch("search")}
                                 className="w-full border border-[#E3E3E3] mt-1  p-2 outline-none focus:border-primary"
                                 placeholder="Keywords"
+                                {...register("search")}
                             />
                         </label>
                     </div>
@@ -90,7 +101,8 @@ export default function Activepositions() {
                             <select
                                 name="options"
                                 className="w-full font-poppins text-[#2C2E3E] text-sm font-medium border border-[#E3E3E3] mt-1  p-2 outline-none focus:border-primary"
-                                onChange={(e) => setStatus(e.target.value)}
+                                {...register("options")}
+                                value={watch("options")}
                             >
                                 <option value="All">All</option>
                                 <option value="Active">Active</option>
@@ -102,9 +114,13 @@ export default function Activepositions() {
 
                     {/* submit button */}
 
-                    <div className="py-3 flex justify-center">
+                    <div className="py-3 flex justify-center gap-x-3">
                         <button type="submit" className=" bg-primary text-white font-inter font-semibold py-2.5 px-8">
                             Apply
+                        </button>
+
+                        <button type="button" className=" bg-red-500 text-white font-inter font-semibold py-2.5 px-8" onClick={clearFilter}>
+                            Clear
                         </button>
                     </div>
                 </form>
@@ -144,8 +160,9 @@ export default function Activepositions() {
                                     <div className=" font-poppins font-medium text-sm py-3 text-center bg-[#E1E1E180] ">Closed</div>
                                 )}
                                 <div className=" font-poppins font-medium text-sm bg-white  p-1 flex justify-around items-center">
-                                    <button className="bg-primary text-white font-inter font-semibold  py-2 px-8 hover:bg-opacity-80 active:bg-opacity-90"
-                                    onClick={() => router.push(`/dashboard/positions/edit/${position._id}`)}
+                                    <button
+                                        className="bg-primary text-white font-inter font-semibold  py-2 px-8 hover:bg-opacity-80 active:bg-opacity-90"
+                                        onClick={() => router.push(`/dashboard/positions/edit/${position._id}`)}
                                     >
                                         Edit
                                     </button>
