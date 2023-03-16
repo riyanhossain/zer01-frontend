@@ -27,8 +27,8 @@ export default function Login() {
             dispatch({
                 type: "SET_USER",
                 payload: {
-                    user: data.data.user,
-                    token: data.data.token,
+                    user: data?.data?.user,
+                    token: data?.data?.token,
                 },
             });
             router.push("/dashboard/positions");

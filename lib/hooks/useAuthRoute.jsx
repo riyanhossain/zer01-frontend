@@ -7,7 +7,7 @@ const useAuthRoute = () => {
     const router = useRouter();
 
     React.useEffect(() => {
-        if (!state.user && !state.token) {
+        if (!state?.user && !state?.token) {
             router.push("/login");
         }
     }, [state.user]);

@@ -15,8 +15,6 @@ export default function Positions() {
 
     useAuthRoute();
 
-    console.log(currentTab);
-
     return (
         <section className="p-5">
             {/* header */}
