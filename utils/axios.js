@@ -4,7 +4,7 @@ import axios from "axios";
 //https://jellyfish-app-br4i7.ondigitalocean.app/
 
 const axiosInstance = axios.create({
-    baseURL: "https://jellyfish-app-br4i7.ondigitalocean.app",
+    baseURL: "http://localhost:5000",
 });
 
 export default axiosInstance;
