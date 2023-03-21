@@ -28,12 +28,6 @@ export default function Addnewjob() {
         },
     });
 
-    React.useEffect(() => {
-        // register("description", { required: true });
-        register("requirements", { required: true });
-        register("language", { required: true });
-    }, [register]);
-
     // const onDescriptionChange = (editorState) => {
     //     setValue("description", editorState);
     // };

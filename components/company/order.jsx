@@ -1,7 +1,89 @@
+import { createPosition } from "@/lib/api/position";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import dynamic from "next/dynamic";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/router";
+import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+
+const QuillNoSSRWrapper = dynamic(import("react-quill"), {
+    ssr: false,
+    loading: () => <p>Loading ...</p>,
+});
 
 export default function Order() {
+    const queryClient = useQueryClient();
+    const router = useRouter();
+    const {
+        register,
+        handleSubmit,
+        setValue,
+        watch,
+        formState: { errors },
+    } = useForm({
+        defaultValues: {
+            jobType: "Full-Time",
+            location: "Remote",
+            status: "Order",
+        },
+    });
+
+    // const onDescriptionChange = (editorState) => {
+    //     setValue("description", editorState);
+    // };
+
+    const onRequirmentsChange = (editorState) => {
+        setValue("requirements", editorState);
+    };
+
+    const onLanguagesChange = (editorState) => {
+        setValue("language", editorState);
+    };
+
+    // const description = watch("description");
+    const requirments = watch("requirements");
+    const languages = watch("language");
+
+    const clearForm = () => {
+        setValue("jobTitle", "");
+        setValue("jobType", "Full-Time");
+        setValue("collaborationForm", "");
+        setValue("companyName", "");
+        setValue("seniorityLevel", "");
+        setValue("location", "Remote");
+        setValue("status", "Order");
+        setValue("description", "");
+        setValue("requirements", "");
+        setValue("language", "");
+        setValue("rate", "");
+        setValue("startDate", "");
+        setValue("endDate", "");
+        setValue("name", "");
+        setValue("phone", "");
+        setValue("email", "");
+        setValue("address", "")
+    };
+
+    // Mutations
+    const mutation = useMutation({
+        mutationFn: createPosition,
+        onSuccess: (data) => {
+            // Invalidate and refetch
+            queryClient.invalidateQueries({ queryKey: ["positions"] });
+
+            toast.success(data?.data.message);
+
+            clearForm();
+        },
+        onError: (error) => {
+            toast.error(error?.response?.data?.message);
+        },
+    });
+
+    const onSubmit = (data) => {
+        // errors && toast.error(errors.root.message);
+        mutation.mutate(data);
+    };
     return (
         <section className="py-8 lg:py-12 container mx-auto px-4 lg:px-8 xl:px-20 ">
             <div className="bg-white shadow-[0px_0px_24px_rgba(0,0,0,0.08)] p-5">
@@ -17,7 +99,7 @@ export default function Order() {
 
                 <hr className="my-3" />
 
-                <form className="grid grid-cols-1 lg:grid-cols-4 gap-5">
+                <form className="grid grid-cols-1 lg:grid-cols-4 gap-5" onSubmit={handleSubmit(onSubmit)}>
                     <label htmlFor="name">
                         <span className="font-poppins text-sm">Name</span>
                         <input
@@ -26,6 +108,8 @@ export default function Order() {
                             placeholder="Name"
                             id="name"
                             className="w-full font-poppins border border-addwhite focus:border-primary outline-none  px-3 py-2 mt-2 placeholder:text-addgray text-sm"
+                            required
+                            {...register("name", { required: "Name is required" })}
                         />
                     </label>
 
@@ -37,6 +121,8 @@ export default function Order() {
                             placeholder="+92123456789"
                             id="name"
                             className="w-full font-poppins border border-addwhite focus:border-primary outline-none  px-3 py-2 mt-2 placeholder:text-addgray text-sm"
+                            required
+                            {...register("phone", { required: "Phone number is required" })}
                         />
                     </label>
 
@@ -48,6 +134,8 @@ export default function Order() {
                             placeholder="example@gmail.com"
                             id="email"
                             className="w-full font-poppins border border-addwhite focus:border-primary outline-none  px-3 py-2 mt-2 placeholder:text-addgray text-sm"
+                            required
+                            {...register("email", { required: "Email is required" })}
                         />
                     </label>
 
@@ -59,6 +147,8 @@ export default function Order() {
                             placeholder="$0 - $1000"
                             id="salary"
                             className="w-full font-poppins border border-addwhite focus:border-primary outline-none  px-3 py-2 mt-2 placeholder:text-addgray text-sm"
+                            required
+                            {...register("rate", { required: "Salary is required" })}
                         />
                     </label>
 
@@ -70,6 +160,8 @@ export default function Order() {
                             placeholder="Name"
                             id="cname"
                             className="w-full font-poppins border border-addwhite focus:border-primary outline-none  px-3 py-2 mt-2 placeholder:text-addgray text-sm"
+                            required
+                            {...register("companyName", { required: "Company name is required" })}
                         />
                     </label>
 
@@ -81,18 +173,22 @@ export default function Order() {
                             placeholder="Name"
                             id="jname"
                             className="w-full font-poppins border border-addwhite focus:border-primary outline-none  px-3 py-2 mt-2 placeholder:text-addgray text-sm"
+                            required
+                            {...register("jobTitle", { required: "Job name is required" })}
                         />
                     </label>
 
                     <div className=" lg:col-span-2 relative">
-                        <label htmlFor="locantion">
+                        <label htmlFor="adress">
                             <span className="font-poppins text-sm">Location</span>
                             <input
                                 type="text"
-                                name="locantion"
+                                name="adress"
                                 placeholder="Enter location"
-                                id="locantion"
+                                id="adress"
                                 className="w-full font-poppins border border-addwhite focus:border-primary outline-none  px-3 py-2 mt-2 placeholder:text-addgray text-sm"
+                                required
+                                {...register("address", { required: "Location is required" })}
                             />
                             <div className="absolute right-2 top-10">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -113,6 +209,68 @@ export default function Order() {
                         </label>
                     </div>
 
+                    <div>
+                        <label htmlFor="sdate" className="space-y-2">
+                            <span className="leading-[25px] font-inter">Start date</span>
+                            <input
+                                type="date"
+                                name="sdate"
+                                id="sdate"
+                                className="w-full border border-[#E3E3E3] focus:border-primary outline-none leading-[25px] font-inter px-6 py-2"
+                                placeholder="Start date"
+                                required
+                                {...register("startDate")}
+                            />
+                        </label>
+                    </div>
+
+                    <div>
+                        <label htmlFor="ldate" className="space-y-2">
+                            <span className="leading-[25px] font-inter">End date</span>
+                            <input
+                                type="date"
+                                name="ldate"
+                                id="ldate"
+                                className="w-full border border-[#E3E3E3] focus:border-primary outline-none leading-[25px] font-inter px-6 py-2"
+                                placeholder="Last date"
+                                required
+                                {...register("endDate")}
+                            />
+                        </label>
+                    </div>
+
+                    <div>
+                        <label htmlFor="location" className="space-y-2">
+                            <span className="leading-[25px] font-inter">Location</span>
+                            <select
+                                name="location"
+                                id="location"
+                                className="w-full border border-[#E3E3E3] focus:border-primary outline-none leading-[25px] font-inter px-6 py-2"
+                                required
+                                {...register("location")}
+                            >
+                                <option value="Remote">Remote</option>
+                                <option value="On-Site">On-site</option>
+                                <option value="Hybrid">Hybrid</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <div>
+                        <label htmlFor="level" className="space-y-2">
+                            <span className="leading-[25px] font-inter">Seniority level</span>
+                            <input
+                                type="text"
+                                name="level"
+                                id="level"
+                                className="w-full border border-[#E3E3E3] focus:border-primary outline-none leading-[25px] font-inter px-6 py-2"
+                                placeholder="5"
+                                required
+                                {...register("seniorityLevel")}
+                            />
+                        </label>
+                    </div>
+
                     <div className=" lg:col-span-4">
                         <label htmlFor="description">
                             <span className="font-poppins text-sm">Enter description</span>
@@ -123,11 +281,32 @@ export default function Order() {
                                 placeholder="Enter location"
                                 id="description"
                                 className="w-full font-poppins border border-addwhite focus:border-primary outline-none  px-3 py-2 mt-2 placeholder:text-addgray text-sm"
+                                required
+                                {...register("description", { required: "Description is required" })}
+                            />
+                        </label>
+                    </div>
+                    <div className=" lg:col-span-4">
+                        <label htmlFor="requirements" className="space-y-2">
+                            <span className="leading-[25px] font-inter">Enter Requirements</span>
+                            <QuillNoSSRWrapper
+                                theme="snow"
+                                value={requirments}
+                                placeholder="Requirements"
+                                name="requirements"
+                                onChange={onRequirmentsChange}
                             />
                         </label>
                     </div>
 
                     <div className=" lg:col-span-4">
+                        <label htmlFor="language" className="space-y-2">
+                            <span className="leading-[25px] font-inter">Language skills</span>
+                            <QuillNoSSRWrapper theme="snow" value={languages} placeholder="Language" name="language" onChange={onLanguagesChange} />
+                        </label>
+                    </div>
+
+                    {/* <div className=" lg:col-span-4">
                         <p className="font-poppins text-sm">Add File</p>
                         <div className="mt-2 border-addgray border-dashed border-[1.5px] w-full flex flex-col justify-center items-center p-4 gap-y-3">
                             <svg width="35" height="32" viewBox="0 0 35 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -157,7 +336,7 @@ export default function Order() {
 
                             <p className="text-sm font-inter text-addgray">PNG, GIF, JPG, Max size: 5MB</p>
                         </div>
-                    </div>
+                    </div> */}
 
                     <div className="lg:col-span-4 flex justify-center lg:justify-end w-full">
                         <input
