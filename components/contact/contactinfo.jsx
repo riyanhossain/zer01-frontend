@@ -1,6 +1,9 @@
 import React from "react";
 import ImageUploading from "react-images-uploading";
 import { useForm } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
+import { sendContactMail } from "@/lib/api/contact";
+import { toast } from "react-hot-toast";
 
 export default function Contactinfo() {
     const [images, setImages] = React.useState([]);
@@ -12,12 +15,31 @@ export default function Contactinfo() {
     const onChange = (imageList, addUpdateIndex) => {
         // data for submit
         setImages(imageList);
-        setValue("images", imageList[0].file);
+        setValue("attatchment", imageList[0]);
     };
 
+    const mutation = useMutation({
+        mutationFn: sendContactMail,
+        onSuccess: (data) => {
+            console.log(data)
+            toast.success(data.message);
+            clearForm();
+        },
+        onError: (error) => {
+            
+            toast.error(error.message);
+        },
+    });
+
     const onSubmit = (data) => {
-        console.log(data);
-        clearForm();
+        const formData = new FormData();
+        formData.append("name", data.name);
+        formData.append("email", data.email);
+        formData.append("phone", data.phone);
+        formData.append("message", data.message);
+        formData.append("attatchment", data.attatchment?.file);
+
+        mutation.mutate(formData);
     };
 
     const clearForm = () => {
@@ -25,6 +47,7 @@ export default function Contactinfo() {
         setValue("email", "");
         setValue("phone", "");
         setValue("message", "");
+        setValue("attatchment", "");
         setImages([]);
     };
 
