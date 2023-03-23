@@ -21,12 +21,10 @@ export default function Contactinfo() {
     const mutation = useMutation({
         mutationFn: sendContactMail,
         onSuccess: (data) => {
-            console.log(data)
-            toast.success(data.message);
+            toast.success(data?.data?.message);
             clearForm();
         },
         onError: (error) => {
-            
             toast.error(error.message);
         },
     });
