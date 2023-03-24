@@ -4,16 +4,41 @@ import useAuthRoute from "@/lib/hooks/useAuthRoute";
 import React from "react";
 import { useRouter } from "next/router";
 import Inactivepositions from "@/components/dashboard/positions/inactivepositions";
+import { saveAs } from "file-saver";
+import * as XLSX from "xlsx/xlsx.mjs";
+import { convert } from "html-to-text";
 
 export default function Positions() {
     const {
-        state: { currentTab },
+        state: { currentTab, xlsx },
         dispatch,
     } = React.useContext(UserContext);
 
     const router = useRouter();
 
     useAuthRoute();
+
+    const exportXLSX = () => {
+        const parsedXLSX = xlsx.map((doc) => {
+            return {
+                ...doc,
+                requirements: convert(doc?.requirements),
+                language: convert(doc?.language),
+            };
+        });
+
+
+        // Convert JSON to XLSX
+        const xlsxData = XLSX.utils.json_to_sheet(parsedXLSX);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, xlsxData, "Sheet1");
+
+        // Save XLSX file
+        const blob = new Blob([XLSX.write(wb, { bookType: "xlsx", type: "array" })], {
+            type: "application/octet-stream",
+        });
+        saveAs(blob, "positions.xlsx");
+    };
 
     return (
         <section className="p-5">
@@ -81,7 +106,14 @@ export default function Positions() {
                     </button>
                 </div>
 
-                <div>
+                <div className="space-x-3">
+                    <button
+                        className="hover:opacity-100 text-white font-semibold leading-[29px] font-inter px-6 py-2 bg-secondary hover:bg-opacity-80  active:bg-opacity-90"
+                        onClick={exportXLSX}
+                    >
+                        Export as XLSX
+                    </button>
+
                     <button
                         className="opacity-30 hover:opacity-100 text-white font-semibold leading-[29px] font-inter px-6 py-2 bg-addgray hover:bg-primary  active:bg-opacity-90"
                         onClick={() => router.push("/dashboard/positions/addnewjob")}

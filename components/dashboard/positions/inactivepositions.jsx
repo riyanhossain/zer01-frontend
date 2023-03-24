@@ -5,9 +5,11 @@ import { changePositionStatus, deletePosition, getPositionsByInactiveStatus } fr
 import ReactPaginate from "react-paginate";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
+import { UserContext } from "@/context/userContext";
 
 export default function Inactivepositions() {
     const queryClient = useQueryClient();
+    const { state, dispatch } = React.useContext(UserContext);
     // const [price, setPrice] = React.useState("");
     const [Keywords, setKeywords] = React.useState("");
     const [page, setPage] = React.useState(1);
@@ -16,6 +18,12 @@ export default function Inactivepositions() {
     const { data } = useQuery({
         queryKey: ["positions", page, limit, Keywords],
         queryFn: () => getPositionsByInactiveStatus({ search: Keywords }),
+        onSuccess: (data) => {
+            dispatch({
+                type: "SET_XLSX",
+                payload: data?.data?.positions,
+            });
+        },
     });
 
     const handlePageClick = (e) => {

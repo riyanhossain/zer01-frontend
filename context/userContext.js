@@ -6,6 +6,7 @@ const initialState = {
     user: null,
     token: null,
     currentTab: "active",
+    xlsx: [],
 };
 
 const reducer = (state, action) => {
@@ -27,6 +28,12 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 currentTab: action.payload,
+            };
+
+        case "SET_XLSX":
+            return {
+                ...state,
+                xlsx: action.payload,
             };
 
         default:

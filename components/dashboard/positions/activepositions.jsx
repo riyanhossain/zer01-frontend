@@ -5,9 +5,11 @@ import { getPositionsByActiveOrClosedStatus, deletePosition, changePositionStatu
 import ReactPaginate from "react-paginate";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
+import { UserContext } from "@/context/userContext";
 
 export default function Activepositions() {
     const queryClient = useQueryClient();
+    const { state, dispatch } = React.useContext(UserContext);
     const [status, setStatus] = React.useState("All");
     const [Keywords, setKeywords] = React.useState("");
     const [page, setPage] = React.useState(1);
@@ -16,6 +18,12 @@ export default function Activepositions() {
     const { data } = useQuery({
         queryKey: ["positions", status, page, limit, Keywords],
         queryFn: () => getPositionsByActiveOrClosedStatus({ status, search: Keywords }),
+        onSuccess: (data) => {
+            dispatch({
+                type: "SET_XLSX",
+                payload: data?.data?.positions,
+            });
+        }
     });
 
     const handlePageClick = (e) => {
