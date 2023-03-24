@@ -66,7 +66,16 @@ export default function Footer() {
                                     href="/privacy"
                                     className="text-addgray text-sm font-inter hover:text-primary transition-colors duration-200 ease-in-out"
                                 >
-                                    GDPR and Privacy
+                                    Privacy Policy
+                                </Link>
+                            </li>
+
+                            <li>
+                                <Link
+                                    href="/gdpr"
+                                    className="text-addgray text-sm font-inter hover:text-primary transition-colors duration-200 ease-in-out"
+                                >
+                                    GDPR
                                 </Link>
                             </li>
                         </ul>

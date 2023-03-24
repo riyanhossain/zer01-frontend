@@ -18,3 +18,11 @@ body {
     min-height: 200px;
 }
 
+.hideScrollBar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.hideScrollBar::-webkit-scrollbar {
+    display: none;
+}

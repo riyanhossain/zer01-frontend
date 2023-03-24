@@ -21,7 +21,7 @@ export default function SendApplicationModal({ modalIsOpen, setIsOpen }) {
     }
     return (
         <Modal isOpen={modalIsOpen} style={customStyles} contentLabel="Send Application Modal">
-            <section className="w-full lg:w-[808px] bg-white h-[calc(100vh-5rem)] overflow-y-scroll">
+            <section className="w-full lg:w-[808px] bg-white h-[calc(100vh-5rem)] overflow-y-scroll hideScrollBar">
                 <div className="py-6 bg-primary relative px-4 flex justify-center items-center">
                     <p className="uppercase font-inter font-bold text-white ">SEND APPLICATION</p>
                     <button className="absolute right-0 text-white text-4xl font-bold p-4" onClick={closeModal}>
