@@ -22,7 +22,6 @@ export default function Contactinfo() {
         mutationFn: sendContactMail,
         onSuccess: (data) => {
             toast.success(data?.data?.message);
-            clearForm();
         },
         onError: (error) => {
             toast.error(error.message);
@@ -35,9 +34,9 @@ export default function Contactinfo() {
         formData.append("email", data.email);
         formData.append("phone", data.phone);
         formData.append("message", data.message);
-        formData.append("attatchment", data.attatchment?.file);
-
+        data.attatchment && formData.append("attatchment", data.attatchment?.file);
         mutation.mutate(formData);
+        clearForm();
     };
 
     const clearForm = () => {
@@ -165,7 +164,7 @@ export default function Contactinfo() {
                             />
                             <ImageUploading
                                 acceptType={acceptType}
-                                multiple
+                                multiple={false}
                                 value={images}
                                 onChange={onChange}
                                 maxNumber={maxNumber}
