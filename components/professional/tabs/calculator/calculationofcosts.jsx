@@ -259,7 +259,7 @@ export default function Calculationofcosts() {
             </div>
 
             {showResults && (
-                <div className="overflow-x-scroll">
+                <div className="overflow-x-scroll hideScrollBar">
                     <Calculationresults amount={amount} />
                 </div>
             )}

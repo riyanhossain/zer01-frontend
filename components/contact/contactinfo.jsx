@@ -7,7 +7,7 @@ import { toast } from "react-hot-toast";
 import { GoogleReCaptcha } from "react-google-recaptcha-v3";
 
 export default function Contactinfo() {
-    const [token, setToken] = React.useState();
+    const [token, setToken] = React.useState("");
 
     const [images, setImages] = React.useState([]);
     const { register, handleSubmit, watch, errors, setValue } = useForm();
@@ -38,10 +38,8 @@ export default function Contactinfo() {
         formData.append("phone", data.phone);
         formData.append("message", data.message);
         data.attatchment && formData.append("attatchment", data.attatchment?.file);
-        mutation.mutate({
-            data: formData,
-            token,
-        });
+        formData.append("token", token);
+        mutation.mutate(formData);
         clearForm();
     };
 
@@ -51,6 +49,7 @@ export default function Contactinfo() {
         setValue("phone", "");
         setValue("message", "");
         setValue("attatchment", "");
+        setToken("");
         setImages([]);
     };
 
