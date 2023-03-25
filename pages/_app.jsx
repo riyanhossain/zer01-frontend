@@ -16,6 +16,8 @@ export default function App({ Component, pageProps }) {
 
     const isDashRoute = pathname.includes("/dashboard");
 
+    
+
     return (
         <>
             <Head>

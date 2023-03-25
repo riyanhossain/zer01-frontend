@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { GoogleReCaptcha } from "react-google-recaptcha-v3";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
@@ -25,6 +26,7 @@ export default function Order() {
             jobType: "Full-Time",
             location: "Remote",
             status: "Order",
+            collaborationForm: "None",
         },
     });
 
@@ -47,7 +49,7 @@ export default function Order() {
     const clearForm = () => {
         setValue("jobTitle", "");
         setValue("jobType", "Full-Time");
-        setValue("collaborationForm", "");
+        setValue("collaborationForm", "None");
         setValue("companyName", "");
         setValue("seniorityLevel", "");
         setValue("location", "Remote");
@@ -61,7 +63,7 @@ export default function Order() {
         setValue("name", "");
         setValue("phone", "");
         setValue("email", "");
-        setValue("address", "")
+        setValue("address", "");
     };
 
     // Mutations
@@ -76,7 +78,7 @@ export default function Order() {
             clearForm();
         },
         onError: (error) => {
-            toast.error(error?.response?.data?.message);
+            toast.error("Something went wrong!");
         },
     });
 
@@ -100,6 +102,7 @@ export default function Order() {
                 <hr className="my-3" />
 
                 <form className="grid grid-cols-1 lg:grid-cols-4 gap-5" onSubmit={handleSubmit(onSubmit)}>
+                    <GoogleReCaptcha onVerify={(token) => setValue("token", token)} />
                     <label htmlFor="name">
                         <span className="font-poppins text-sm">Name</span>
                         <input
@@ -245,7 +248,7 @@ export default function Order() {
                             <select
                                 name="location"
                                 id="location"
-                                className="w-full border border-[#E3E3E3] focus:border-primary outline-none leading-[25px] font-inter px-6 py-2"
+                                className="w-full border border-[#E3E3E3] focus:border-primary outline-none leading-[25px] font-inter px-6 py-2.5"
                                 required
                                 {...register("location")}
                             >

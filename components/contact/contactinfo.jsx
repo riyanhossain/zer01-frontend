@@ -7,8 +7,6 @@ import { toast } from "react-hot-toast";
 import { GoogleReCaptcha } from "react-google-recaptcha-v3";
 
 export default function Contactinfo() {
-    const [token, setToken] = React.useState("");
-
     const [images, setImages] = React.useState([]);
     const { register, handleSubmit, watch, errors, setValue } = useForm();
     const maxNumber = 1;
@@ -38,7 +36,7 @@ export default function Contactinfo() {
         formData.append("phone", data.phone);
         formData.append("message", data.message);
         data.attatchment && formData.append("attatchment", data.attatchment?.file);
-        formData.append("token", token);
+        formData.append("token", data.token);
         mutation.mutate(formData);
         clearForm();
     };
@@ -49,13 +47,13 @@ export default function Contactinfo() {
         setValue("phone", "");
         setValue("message", "");
         setValue("attatchment", "");
-        setToken("");
+        setValue("token", "");
         setImages([]);
     };
 
     return (
         <section className="container mx-auto px-4 lg:px-8 xl:px-20 py-6 lg:py-20 ">
-            <GoogleReCaptcha onVerify={(token) => setToken(token)} />
+            <GoogleReCaptcha onVerify={(token) => setValue("token", token)} />
             <div className="grid grid-cols-1 lg:grid-cols-[40%_60%] gap-y-5">
                 <div className=" space-y-6 lg:space-y-12 py-6 lg:pl-20">
                     <div className="space-y-6">
