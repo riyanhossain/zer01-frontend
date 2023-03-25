@@ -4,8 +4,12 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { sendContactMail } from "@/lib/api/contact";
 import { toast } from "react-hot-toast";
+import { GoogleReCaptcha } from "react-google-recaptcha-v3";
+import { validateCaptchaToken } from "@/lib/api/captacha";
 
 export default function Contactinfo() {
+    const [token, setToken] = React.useState();
+
     const [images, setImages] = React.useState([]);
     const { register, handleSubmit, watch, errors, setValue } = useForm();
     const maxNumber = 1;
@@ -29,14 +33,14 @@ export default function Contactinfo() {
     });
 
     const onSubmit = (data) => {
-        const formData = new FormData();
-        formData.append("name", data.name);
-        formData.append("email", data.email);
-        formData.append("phone", data.phone);
-        formData.append("message", data.message);
-        data.attatchment && formData.append("attatchment", data.attatchment?.file);
-        mutation.mutate(formData);
-        clearForm();
+        // const formData = new FormData();
+        // formData.append("name", data.name);
+        // formData.append("email", data.email);
+        // formData.append("phone", data.phone);
+        // formData.append("message", data.message);
+        // data.attatchment && formData.append("attatchment", data.attatchment?.file);
+        // mutation.mutate(formData);
+        // clearForm();
     };
 
     const clearForm = () => {
@@ -48,8 +52,20 @@ export default function Contactinfo() {
         setImages([]);
     };
 
+    const validateUserHumanOrBot = (token) => {
+        if (token) {
+            const res = validateCaptchaToken(token);
+
+            console.log(res);
+        } else {
+            toast.error("Please verify that you are not a robot");
+            return false;
+        }
+    };
+
     return (
         <section className="container mx-auto px-4 lg:px-8 xl:px-20 py-6 lg:py-20 ">
+            <GoogleReCaptcha onVerify={validateUserHumanOrBot} />
             <div className="grid grid-cols-1 lg:grid-cols-[40%_60%] gap-y-5">
                 <div className=" space-y-6 lg:space-y-12 py-6 lg:pl-20">
                     <div className="space-y-6">
