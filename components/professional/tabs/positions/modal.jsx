@@ -23,7 +23,7 @@ const customStyles = {
     },
 };
 
-export default function SendApplicationModal({ modalIsOpen, setIsOpen }) {
+export default function SendApplicationModal({ modalIsOpen, setIsOpen, id = "" }) {
     const [consent, setConsent] = React.useState(false);
     const [images, setImages] = React.useState([]);
     const { register, handleSubmit, watch, errors, setValue } = useForm();
@@ -55,6 +55,7 @@ export default function SendApplicationModal({ modalIsOpen, setIsOpen }) {
 
     const onSubmit = (data) => {
         const formData = new FormData();
+        formData.append("id", id);
         formData.append("name", data.name);
         formData.append("phone", data.phone);
         formData.append("email", data.email);
@@ -67,6 +68,7 @@ export default function SendApplicationModal({ modalIsOpen, setIsOpen }) {
     };
 
     const clearForm = () => {
+        setValue("id", "");
         setValue("name", "");
         setValue("phone", "");
         setValue("email", "");

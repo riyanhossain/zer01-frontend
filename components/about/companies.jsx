@@ -366,7 +366,7 @@ export default function Companies() {
                         focus on your core activities.
                     </p>
                     <p className="text-addgray font-inter w-full lg:w-[625px]">
-                        For more information about cooperation with us and our services, see the <Link href={"/companies"} className="font-semibold text-primary underline">Companies</Link> section.
+                        For more information about cooperation with us and our services, see the <Link href={"/company"} className="font-semibold text-primary underline">Companies</Link> section.
                     </p>
                 </div>
             </div>

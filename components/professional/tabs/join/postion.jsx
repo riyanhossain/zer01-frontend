@@ -1,9 +1,10 @@
 import React from "react";
 import company from "../../../../assets/about/company.png";
 import Image from "next/image";
-import Link from "next/link";
+import { UserContext } from "@/context/userContext";
 
 export default function Postion() {
+    const { state, dispatch } = React.useContext(UserContext);
     return (
         <section className="py-8 lg:py-12 container mx-auto px-4 lg:px-8 xl:px-20">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-5">
@@ -430,7 +431,17 @@ export default function Postion() {
                     </div>
 
                     <div className=" flex justify-center">
-                        <button className="mt-12 py-3.5 px-6 bg-primary text-white font-inter font-semibold hover:bg-opacity-80 active:bg-opacity-70">Check open positions</button>
+                        <button
+                            className="mt-12 py-3.5 px-6 bg-primary text-white font-inter font-semibold hover:bg-opacity-80 active:bg-opacity-70"
+                            onClick={() => {
+                                dispatch({
+                                    type: "SET_ACTIVE_TAB",
+                                    payload: "postions",
+                                });
+                            }}
+                        >
+                            Check open positions
+                        </button>
                     </div>
                 </div>
             </div>

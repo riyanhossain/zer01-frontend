@@ -34,9 +34,7 @@ export default function Details({ setDetailsMode, setPositionId, positionId }) {
                             <p className="text-primary text-xl font-semibold font-inter leading-[22px] text-center">Internal ID:</p>
                         </div>
                         <div className="col-span-1  border-b border-[#E8E8E8]">
-                            <p className="text-xl font-semibold font-inter leading-[22px] text-center">
-                                {data?.data?.position?._id.slice(0, 6) + "..." + data?.data?.position?._id.slice(-6)}
-                            </p>
+                            <p className="text-xl font-semibold font-inter leading-[22px] text-center">{data?.data?.position?.id}</p>
                         </div>
 
                         <div className="col-span-1  border-b border-r border-[#E8E8E8]">
@@ -129,7 +127,7 @@ export default function Details({ setDetailsMode, setPositionId, positionId }) {
                 </div>
             </div>
 
-            <SendApplicationModal modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} />
+            <SendApplicationModal modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} id={data?.data?.position?.id} />
         </section>
     );
 }

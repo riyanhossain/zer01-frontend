@@ -156,7 +156,7 @@ export default function Inactivepositions() {
                             <div key={key} className="grid grid-cols-[8%_12%_15%_18%_15%_32%] pt-3">
                                 <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">{key + 1}</div>
                                 <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">
-                                    {position._id.slice(0, 6) + "..." + position._id.slice(-6)}
+                                    {position.id}
                                 </div>
                                 <div className=" font-poppins font-medium text-sm bg-white py-3 text-center border-r border-[#D9D5D5]">
                                     {position.jobTitle}
