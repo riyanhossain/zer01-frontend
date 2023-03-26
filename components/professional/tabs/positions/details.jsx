@@ -108,14 +108,14 @@ export default function Details({ setDetailsMode, setPositionId, positionId }) {
 
                 <div className="p-5  border border-primary mt-[30px]">
                     <p className="text-primary text-xl font-bold font-inter leading-[30px] text-center">Project requirements</p>
-                    <p className=" font-normal font-poppins leading-[22px]">{parse(data?.data?.position?.requirements || "")}</p>
+                    <div className=" font-normal font-poppins leading-[22px]">{parse(data?.data?.position?.requirements || "")}</div>
                 </div>
 
                 {/* language */}
                 <div className="flex justify-center">
                     <div className=" p-3 w-[50%]  border border-primary mt-[30px]">
                         <p className="text-primary text-xl font-bold font-inter leading-[30px] text-center">Language skills</p>
-                        <p className=" font-normal font-poppins leading-[22px]">{parse(data?.data?.position?.language || "")}</p>
+                        <div className=" font-normal font-poppins leading-[22px]">{parse(data?.data?.position?.language || "")}</div>
                     </div>
                 </div>
 
