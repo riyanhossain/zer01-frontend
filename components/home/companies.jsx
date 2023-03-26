@@ -1,8 +1,10 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React from "react";
 import c1 from "../../assets/home/companies/c1.png";
 
 export default function Companies() {
+    const router = useRouter();
     return (
         <section className="py-8 lg:py-24 container mx-auto px-4 lg:px-8 xl:px-20 ">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-6">
@@ -26,7 +28,10 @@ export default function Companies() {
                     </p>
 
                     <div className="pt-3">
-                        <button className="flex items-center gap-x-3 px-8 py-2.5 font-inter font-semibold text-white bg-primary hover:bg-opacity-80 active:bg-opacity-70">
+                        <button
+                            className="flex items-center gap-x-3 px-8 py-2.5 font-inter font-semibold text-white bg-primary hover:bg-opacity-80 active:bg-opacity-70"
+                            onClick={() => router.push("/company")}
+                        >
                             Read More{" "}
                             <svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M1.91 0.5L0.5 1.91L5.08 6.5L0.5 11.09L1.91 12.5L7.91 6.5L1.91 0.5Z" fill="white" />
@@ -37,7 +42,7 @@ export default function Companies() {
                 </div>
 
                 <div className="flex justify-center relative">
-                    <Image src={c1} alt="c1" width={580.97} height={416.47} className="z-10  "/>
+                    <Image src={c1} alt="c1" width={580.97} height={416.47} className="z-10  " />
                     <div className=" absolute right-0 bottom-[-2rem] hidden lg:block">
                         <svg width="304" height="252" viewBox="0 0 304 252" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <ellipse opacity="0.6" cx="2.42627" cy="2.15225" rx="1.95404" ry="1.95571" fill="#499F93" />

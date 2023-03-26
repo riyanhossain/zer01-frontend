@@ -1,10 +1,14 @@
+import { UserContext } from "@/context/userContext";
 import React from "react";
 import Calculator from "./tabs/calculator";
 import Join from "./tabs/join";
 import Postions from "./tabs/postions";
 
 export default function Tabs() {
-    const [activeTab, setActiveTab] = React.useState("join");
+    const {
+        state: { activeTab },
+        dispatch,
+    } = React.useContext(UserContext);
 
     return (
         <>
@@ -12,21 +16,21 @@ export default function Tabs() {
                 <div className="flex items-center gap-x-10">
                     <button
                         className={`font-inter  ${activeTab === "join" ? "font-semibold text-primary" : "text-[#434656]"}`}
-                        onClick={() => setActiveTab("join")}
+                        onClick={() => dispatch({ type: "SET_ACTIVE_TAB", payload: "join" })}
                     >
                         Join Us
                     </button>
 
                     <button
                         className={`font-inter ${activeTab === "postions" ? "font-semibold text-primary" : "text-[#434656]"}`}
-                        onClick={() => setActiveTab("postions")}
+                        onClick={() => dispatch({ type: "SET_ACTIVE_TAB", payload: "postions" })}
                     >
                         Postions
                     </button>
 
                     <button
                         className={`font-inter ${activeTab === "calculator" ? "font-semibold text-primary" : "text-[#434656]"}`}
-                        onClick={() => setActiveTab("calculator")}
+                        onClick={() => dispatch({ type: "SET_ACTIVE_TAB", payload: "calculator" })}
                     >
                         Calculator
                     </button>

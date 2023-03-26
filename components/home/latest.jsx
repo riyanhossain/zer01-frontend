@@ -2,16 +2,16 @@ import { useQuery } from "@tanstack/react-query";
 import { getAllPositions } from "@/lib/api/position";
 import { useRouter } from "next/router";
 import React from "react";
+import { UserContext } from "@/context/userContext";
 
 export default function Latest() {
     const router = useRouter();
+    const { state, dispatch } = React.useContext(UserContext);
 
     const { data } = useQuery({
         queryKey: ["positions"],
         queryFn: getAllPositions,
     });
-
-
 
     return (
         <section className="container mx-auto py-20 flex justify-center">
@@ -40,7 +40,10 @@ export default function Latest() {
                 <div className="flex justify-center items-center">
                     <button
                         className="text-white font-semibold font-inter p-3 bg-primary hover:bg-opacity-80 active:bg-opacity-60"
-                        onClick={() => router.push("/professional")}
+                        onClick={() => {
+                            router.push("/professional");
+                            dispatch({ type: "SET_ACTIVE_TAB", payload: "postions" });
+                        }}
                     >
                         Check open positions
                     </button>

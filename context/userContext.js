@@ -7,6 +7,7 @@ const initialState = {
     token: null,
     currentTab: "active",
     xlsx: [],
+    activeTab: "join",
 };
 
 const reducer = (state, action) => {
@@ -34,6 +35,12 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 xlsx: action.payload,
+            };
+
+        case "SET_ACTIVE_TAB":
+            return {
+                ...state,
+                activeTab: action.payload,
             };
 
         default:

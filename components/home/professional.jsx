@@ -3,8 +3,10 @@ import Image from "next/image";
 import p1 from "../../assets/home/professional/p1.png";
 import p2 from "../../assets/home/professional/p2.png";
 import p3 from "../../assets/home/professional/p3.png";
+import { useRouter } from "next/router";
 
 export default function Professional() {
+    const router = useRouter();
     return (
         <section className="py-8 lg:py-24 bg-[#FBFBFB]">
             <div className="container mx-auto px-4 lg:px-8 xl:px-20 ">
@@ -42,7 +44,10 @@ export default function Professional() {
                         </p>
 
                         <div className="pt-3">
-                            <button className="flex items-center gap-x-3 px-8 py-2.5 font-inter font-semibold text-white bg-primary hover:bg-opacity-80 active:bg-opacity-70">
+                            <button
+                                className="flex items-center gap-x-3 px-8 py-2.5 font-inter font-semibold text-white bg-primary hover:bg-opacity-80 active:bg-opacity-70"
+                                onClick={() => router.push("/professional")}
+                            >
                                 Read More{" "}
                                 <svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M1.91 0.5L0.5 1.91L5.08 6.5L0.5 11.09L1.91 12.5L7.91 6.5L1.91 0.5Z" fill="white" />
