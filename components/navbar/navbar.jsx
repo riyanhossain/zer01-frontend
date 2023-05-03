@@ -6,21 +6,24 @@ import Mobilenav from "./mobilenav";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = React.useState(false);
+    const handleClose = () => {
+        setIsOpen(false);
+    }
 
     return (
-        <nav className=" bg-[#3983781A] ">
+        <nav className="bg-[#3983781A]">
             <div className="container mx-auto px-4 lg:px-8 xl:px-20 ">
                 <div className="flex items-center justify-between relative py-5 lg:py-7">
                     <Link href="/">
-                        <Image src={logo} width={100} height={100} className="absolute w-auto h-auto z-50 top-0" priority alt="logo"/>
+                        <Image src={logo} width={150} height={150} className="absolute w-auto h-auto z-50 top-5" priority alt="logo"/>
                     </Link>
 
                     <div className="hidden lg:flex items-center space-x-8 ml-64">
                         <Link href="/">
                             <p className="text-[#212121] font-poppins  hover:text-[#398378]">Home</p>
                         </Link>
-                        <Link href="/professional">
-                            <p className="text-[#212121] font-poppins  hover:text-[#398378]">For Professional</p>
+                        <Link href="/professionals">
+                            <p className="text-[#212121] font-poppins  hover:text-[#398378]">For Professionals</p>
                         </Link>
                         <Link href="/company">
                             <p className="text-[#212121] font-poppins hover:text-[#398378]">For Companies</p>
@@ -81,7 +84,7 @@ export default function Navbar() {
                     <div className="hidden lg:flex"></div>
                 </div>
 
-                {isOpen ? <Mobilenav /> : null}
+                {isOpen ? <Mobilenav onClose={handleClose} /> : null}
             </div>
         </nav>
     );

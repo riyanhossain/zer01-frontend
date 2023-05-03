@@ -118,7 +118,6 @@ export default function Activepositions() {
                             >
                                 <option value="All">All</option>
                                 <option value="Active">Active</option>
-                                {/* <option value="inactive">Inactive</option> */}
                                 <option value="Closed">Closed</option>
                             </select>
                         </label>

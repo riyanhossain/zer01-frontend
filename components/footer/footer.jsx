@@ -27,7 +27,7 @@ export default function Footer() {
 
                             <li>
                                 <Link
-                                    href="/professional"
+                                    href="/professionals"
                                     className="text-addgray text-sm font-inter hover:text-primary transition-colors duration-200 ease-in-out"
                                 >
                                     For Professional

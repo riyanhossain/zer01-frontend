@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "task-professional",
+      "appliesTo": "components/home/professional.jsx",
+      "type": "launch"
+    }
+  ]
+}

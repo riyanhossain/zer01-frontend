@@ -3,6 +3,7 @@ import React from "react";
 import f1 from "../../assets/about/freelancers/f1.png";
 import f2 from "../../assets/about/freelancers/f2.png";
 import f3 from "../../assets/about/freelancers/f3.png";
+import Link from "next/link";
 
 export default function Freelancers() {
     return (
@@ -11,17 +12,16 @@ export default function Freelancers() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-5">
                     <div className="space-y-4 py-6 lg:py-16 flex flex-col justify-center">
                         <h1 className="text-3xl font-semibold font-poppins text-addblack uppercase">
-                            OFFER FOR <span className="text-primary">IT FREELANCERS</span>
+                            OFFER FOR <span className="text-primary">IT PROFESSIONALS</span>
                         </h1>
 
                         <p className="text-addblack text-sm font-inter font-medium w-full lg:w-[519px]">
-                            Are you interested in freelancing, but you don’t know how and where to start?
+                            Are you PRO, but you don’t know how and where to start your new journey?
                         </p>
 
                         <p className="text-addgray font-inter w-full lg:w-[516px]">
-                            We are here for those who want to step out the line and enter the real world of IT freelancing with a helmet coat of arms
-                            on their chest. We will help you experience the freelance IT world of direct communication, relationships and solidarity
-                            that we have created together and improve every day. We will also advise you on accounting, too.
+                            <span className="text-primary">zero1code</span> finds you the opportunity to work with diverse types of clients, to take control and choose your schedule, to build your own success story, with no administrative burden.
+                            For more, visit  <Link href={"/professionals"} className="font-semibold text-primary underline">Join us</Link> section
                         </p>
                     </div>
 

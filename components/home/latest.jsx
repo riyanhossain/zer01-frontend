@@ -21,10 +21,13 @@ export default function Latest() {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 ">
                     {data?.data?.positions?.slice(0, 3).map((position, key) => (
                         <div key={key} className="p-5 shadow-[0px_0px_16px_rgba(68,68,68,0.08)] bg-white border-b-2 border-addgray">
-                            <h1 className="text-lg font-semibold font-poppins">{position.jobTitle}</h1>
-                            <p className="text-sm font-semibold text-primary font-inter">{position.rate}</p>
+                            <h1 className="text-lg font-semibold font-poppins text-center">{position.jobTitle}</h1>
                             <div className="py-5">
                                 <hr className="border-[#E7E7E7]" />
+                            </div>
+                            <div className="flex justify-between items-center">
+                                <p className="text-sm font-semibold text-primary font-inter">{position.rate}</p>
+                                <p className="text-sm font-semibold text-primary font-inter">{position.collaborationForm}</p>
                             </div>
 
                             <div className="flex justify-between items-center">
@@ -41,8 +44,8 @@ export default function Latest() {
                     <button
                         className="text-white font-semibold font-inter p-3 bg-primary hover:bg-opacity-80 active:bg-opacity-60"
                         onClick={() => {
-                            router.push("/professional");
-                            dispatch({ type: "SET_ACTIVE_TAB", payload: "postions" });
+                            router.push("/professionals");
+                            dispatch({ type: "SET_ACTIVE_TAB", payload: "positions" });
                         }}
                     >
                         Check open positions

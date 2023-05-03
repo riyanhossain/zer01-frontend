@@ -9,9 +9,9 @@ export default function Companies() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-5">
                 <div className="relative h-auto lg:h-[495px]">
                     <div className="w-[327.77px] h-[315.63px] rounded-lg bg-primary hidden lg:block"></div>
-                    <Image src={company} className=" w-full lg:w-[449px] h-[300px] lg:h-[413px] lg:absolute top-10 left-10 z-20" />
-                    <div className="absolute bottom-0 right-[8.5rem] hidden lg:block">
-                        <svg width="138" height="133" viewBox="0 0 138 133" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <Image src={company} className="w-[366.02px] h-[290.48px] absolute top-20 bottom-0 right-32 rounded-lg hidden lg:block" />
+                    <div className="absolute bottom-10 right-[8.5rem] hidden lg:block">
+                        <svg width="138" height="133" viewBox="0 0 150 133" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_184_280)">
                                 <path
                                     d="M37.6932 100.177C37.6971 100.693 37.8535 101.196 38.1428 101.622C38.4321 102.049 38.8413 102.381 39.3188 102.576C39.7963 102.77 40.3208 102.819 40.826 102.716C41.3313 102.613 41.7948 102.363 42.158 101.997C42.5213 101.631 42.7681 101.166 42.8673 100.66C42.9664 100.154 42.9136 99.6296 42.7154 99.1535C42.5171 98.6775 42.1824 98.2708 41.7534 97.9847C41.3244 97.6986 40.8203 97.5459 40.3046 97.5459C39.96 97.5459 39.6188 97.6141 39.3007 97.7465C38.9826 97.879 38.6938 98.0731 38.4511 98.3177C38.2083 98.5623 38.0164 98.8525 37.8863 99.1716C37.7562 99.4907 37.6906 99.8324 37.6932 100.177Z"
@@ -349,7 +349,7 @@ export default function Companies() {
 
                 <div className="space-y-4 py-6 lg:py-16">
                     <h1 className="text-3xl font-semibold font-poppins text-addblack">
-                        Offer For <span className="text-primary">Companies</span>
+                        OFFER FOR <span className="text-primary">COMPANIES</span>
                     </h1>
 
                     <p className="text-addblack font-inter w-full lg:w-[625px]">
@@ -357,13 +357,11 @@ export default function Companies() {
                     </p>
 
                     <p className="text-addgray font-inter w-full lg:w-[625px]">
-                        Zer01 freelancers offers extra muscle for your IT projects. We will help you expand your internal teams quickly,
-                        professionally and easily. Highly qualified Zer01 are the right reinforcements for your projects.
+                        <span className="text-primary">Zero1code</span> makes the difference. We provide the perfect way to stay in control of your costs and let you focus on your core business processes. You’ll have no recruitment hussles, risks or budget challenges. 
                     </p>
                     <p className="text-addgray font-inter w-full lg:w-[625px]">
-                        Our company is a strong and reliable IT outsourcing partner. We guarantee professionality, fairness, individual approach and
-                        commitment. Don’t waste your time with long recruitment processes. We will pre-select the right candidates for you so you can
-                        focus on your core activities.
+                        <span className="text-primary">Zero1code</span> will do the shortlisting process with only relevant and pre-tested professionals or teams of IT experts.
+                        You like IT, you can start IT in no time. All of this in a risk-free way, no litigation, no cost biases.
                     </p>
                     <p className="text-addgray font-inter w-full lg:w-[625px]">
                         For more information about cooperation with us and our services, see the <Link href={"/company"} className="font-semibold text-primary underline">Companies</Link> section.

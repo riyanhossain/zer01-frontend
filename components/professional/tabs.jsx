@@ -2,7 +2,7 @@ import { UserContext } from "@/context/userContext";
 import React from "react";
 import Calculator from "./tabs/calculator";
 import Join from "./tabs/join";
-import Postions from "./tabs/postions";
+import Positions from "./tabs/positions";
 
 export default function Tabs() {
     const {
@@ -22,10 +22,10 @@ export default function Tabs() {
                     </button>
 
                     <button
-                        className={`font-inter ${activeTab === "postions" ? "font-semibold text-primary" : "text-[#434656]"}`}
-                        onClick={() => dispatch({ type: "SET_ACTIVE_TAB", payload: "postions" })}
+                        className={`font-inter ${activeTab === "positions" ? "font-semibold text-primary" : "text-[#434656]"}`}
+                        onClick={() => dispatch({ type: "SET_ACTIVE_TAB", payload: "positions" })}
                     >
-                        Postions
+                        Positions
                     </button>
 
                     <button
@@ -38,12 +38,12 @@ export default function Tabs() {
                 <div className="mt-2 h-0.5 bg-[#D9DBE9] relative">
                     <div
                         className={`absolute  h-full transition-all duration-150 ease-linear bg-primary ${
-                            activeTab === "join" ? "w-[60px] left-0" : activeTab === "postions" ? "w-[80px] left-[90px]" : "w-[85px] left-[200px]"
+                            activeTab === "join" ? "w-[60px] left-0" : activeTab === "positions" ? "w-[80px] left-[90px]" : "w-[85px] left-[200px]"
                         }`}
                     ></div>
                 </div>
             </section>
-            {activeTab === "join" ? <Join /> : activeTab === "postions" ? <Postions /> : <Calculator />}
+            {activeTab === "join" ? <Join /> : activeTab === "positions" ? <Positions /> : <Calculator />}
         </>
     );
 }

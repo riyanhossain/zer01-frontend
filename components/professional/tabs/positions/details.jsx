@@ -14,7 +14,7 @@ export default function Details({ setDetailsMode, setPositionId, positionId }) {
 
     return (
         <section className="container mx-auto px-4 lg:px-8 xl:px-20 ">
-            <div className="p-4 lg:py-8 lg:px-20 shadow-[0px_4px_24px_rgba(0,0,0,0.1)] border-2 border-primary">
+            <div className="p-4 lg:p-8 shadow-[0px_4px_24px_rgba(0,0,0,0.1)]">
                 <button
                     onClick={() => {
                         setDetailsMode(false);
@@ -29,7 +29,7 @@ export default function Details({ setDetailsMode, setPositionId, positionId }) {
                 {/* table */}
 
                 <div className="flex justify-center">
-                    <div className="grid grid-cols-2 w-full lg:w-[538px] border border-primary">
+                    <div className="mt-4  grid grid-cols-2 lg:grid-cols-2 gap-3">
                         <div className="col-span-1  border-b border-r border-[#E8E8E8]">
                             <p className="text-primary text-xl font-semibold font-inter leading-[22px] text-center">Internal ID:</p>
                         </div>
@@ -52,14 +52,6 @@ export default function Details({ setDetailsMode, setPositionId, positionId }) {
                                 {data?.data?.position.seniorityLevel} years*
                             </p>
                         </div>
-
-                        {/* <div className="col-span-1  border-b border-r border-[#E8E8E8]">
-                            <p className="text-primary text-xl font-semibold font-inter leading-[22px] text-center">Job area:</p>
-                        </div>
-                        <div className="col-span-1  border-b border-[#E8E8E8]">
-                            <p className="text-xl font-semibold font-inter leading-[22px] text-center">TELECOM</p>
-                        </div> */}
-
                         <div className="col-span-1  border-b border-r border-[#E8E8E8]">
                             <p className="text-primary text-xl font-semibold font-inter leading-[22px] text-center">Collaboration form:</p>
                         </div>
@@ -99,21 +91,21 @@ export default function Details({ setDetailsMode, setPositionId, positionId }) {
                     </div>
                 </div>
 
-                <div className="p-5  border border-primary mt-[30px]">
-                    <p className="text-primary text-xl font-bold font-inter leading-[30px] text-center">Project description</p>
-                    <p className=" font-normal font-poppins leading-[22px]">{data?.data?.position?.description}</p>
+                <div className="p-5 mt-[30px]">
+                    <p className="text-primary text-xl font-bold font-inter leading-[30px] text-center ">Project description</p>
+                    <p className=" font-normal font-poppins leading-[22px] text-centert">{data?.data?.position?.description}</p>
                 </div>
 
-                <div className="p-5  border border-primary mt-[30px]">
+                <div className="p-5 mt-[30px]">
                     <p className="text-primary text-xl font-bold font-inter leading-[30px] text-center">Project requirements</p>
-                    <div className=" font-normal font-poppins leading-[22px]">{parse(data?.data?.position?.requirements || "")}</div>
+                    <p className=" font-normal font-poppins leading-[22px] text-center">{parse(data?.data?.position?.requirements || "")}</p>
                 </div>
 
                 {/* language */}
                 <div className="flex justify-center">
-                    <div className=" p-3 w-[50%]  border border-primary mt-[30px]">
+                    <div className=" p-3 w-[50%] mt-[30px]">
                         <p className="text-primary text-xl font-bold font-inter leading-[30px] text-center">Language skills</p>
-                        <div className=" font-normal font-poppins leading-[22px]">{parse(data?.data?.position?.language || "")}</div>
+                        <p className=" font-normal font-poppins leading-[22px] text-center">{parse(data?.data?.position?.language || "")}</p>
                     </div>
                 </div>
 

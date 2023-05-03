@@ -1,8 +1,8 @@
 import React from "react";
 import Image from "next/image";
-import p1 from "../../assets/home/professional/p1.png";
-import p2 from "../../assets/home/professional/p2.png";
-import p3 from "../../assets/home/professional/p3.png";
+import p1 from "../../assets/home/professionals/p1.png";
+import p2 from "../../assets/home/professionals/p2.png";
+import p3 from "../../assets/home/professionals/p3.png";
 import { useRouter } from "next/router";
 
 export default function Professional() {
@@ -46,7 +46,7 @@ export default function Professional() {
                         <div className="pt-3">
                             <button
                                 className="flex items-center gap-x-3 px-8 py-2.5 font-inter font-semibold text-white bg-primary hover:bg-opacity-80 active:bg-opacity-70"
-                                onClick={() => router.push("/professional")}
+                                onClick={() => router.push("/professionals")}
                             >
                                 Read More{" "}
                                 <svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">

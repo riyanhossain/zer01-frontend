@@ -29,7 +29,7 @@ export default function SendApplicationModal({ modalIsOpen, setIsOpen, id = "" }
     const { register, handleSubmit, watch, errors, setValue } = useForm();
     const maxNumber = 1;
 
-    const acceptType = ["jpg", "png", "jpeg", "gif", "pdf"];
+    const acceptType = ["pdf", "application/pdf"];
 
     const onChange = (imageList, addUpdateIndex) => {
         // data for submit
@@ -166,6 +166,7 @@ export default function SendApplicationModal({ modalIsOpen, setIsOpen, id = "" }
                         value={images}
                         onChange={onChange}
                         maxNumber={maxNumber}
+                        allowNonImageType="true"
                         dataURLKey="data_url"
                     >
                         {({ imageList, onImageUpload, onImageRemoveAll, onImageUpdate, onImageRemove, isDragging, dragProps }) => (
@@ -205,7 +206,7 @@ export default function SendApplicationModal({ modalIsOpen, setIsOpen, id = "" }
                                             Drop your files here, or <span className="text-primary cursor-pointer">Upload</span>
                                         </p>
 
-                                        <p className="text-sm font-inter text-addgray">PNG, GIF, JPG, Max size: 5MB</p>
+                                        <p className="text-sm font-inter text-addgray">PDF, Max size: 5MB</p>
                                     </button>
                                 )}
                             </div>
