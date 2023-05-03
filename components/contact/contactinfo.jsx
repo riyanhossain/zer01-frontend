@@ -11,7 +11,7 @@ export default function Contactinfo() {
     const { register, handleSubmit, watch, errors, setValue } = useForm();
     const maxNumber = 1;
 
-    const acceptType = ["pdf", "application/pdf"];
+    const acceptType = ["jpg", "png", "jpeg", "gif"];
 
     const onChange = (imageList, addUpdateIndex) => {
         // data for submit
@@ -34,6 +34,7 @@ export default function Contactinfo() {
         formData.append("name", data.name);
         formData.append("email", data.email);
         formData.append("phone", data.phone);
+        formData.append("subject", data.subject);
         formData.append("message", data.message);
         data.attatchment && formData.append("attatchment", data.attatchment?.file);
         formData.append("token", data.token);
@@ -45,6 +46,7 @@ export default function Contactinfo() {
         setValue("name", "");
         setValue("email", "");
         setValue("phone", "");
+        setValue("subject", "");
         setValue("message", "");
         setValue("attatchment", "");
         setValue("token", "");
@@ -71,8 +73,7 @@ export default function Contactinfo() {
                         </div>
 
                         <div className="space-y-1">
-                            <p className="font-inter text-addgray">+421 (0) 908 857 752</p>
-                            <p className="font-inter text-addgray">+421 (0) 903 175 395</p>
+                            <p className="font-inter text-addgray">+4(0) 743 430 098</p>
                         </div>
                     </div>
 
@@ -89,7 +90,7 @@ export default function Contactinfo() {
                         </div>
 
                         <div className="space-y-1">
-                            <p className="font-inter text-addgray w-full lg:w-[231px]">Seberíniho 1, 821 03 Bratislava Slovensko</p>
+                            <p className="font-inter text-addgray w-full lg:w-[231px]">Street 13 Septembrie, N. 12A, Cluj-Napoca, CLUJ, Romania</p>
                         </div>
                     </div>
 
@@ -107,13 +108,8 @@ export default function Contactinfo() {
 
                         <div className="space-y-3">
                             <div className="space-y-1">
-                                <p className="font-inter text-primary">General</p>
-                                <p className="font-inter text-addgray">Zer01@gmail.com</p>
-                            </div>
-
-                            <div className="space-y-1">
-                                <p className="font-inter text-primary">Business</p>
-                                <p className="font-inter text-addgray">sales@Zer01.pk</p>
+                                <p className="font-inter text-primary">Contact</p>
+                                <p className="font-inter text-addgray">contact@zero1code.com</p>
                             </div>
                         </div>
                     </div>
@@ -134,7 +130,10 @@ export default function Contactinfo() {
                                 className="w-full border-b border-[#E0E0E0]  py-1 font-inter outline-none focus:border-primary"
                                 required
                                 value={watch("name")}
-                                {...register("name", { required: true })}
+                                {...register("name", {
+                                    required: true,
+                                    maxLength: 25,
+                                })}
                             />
 
                             <input
@@ -143,7 +142,10 @@ export default function Contactinfo() {
                                 className="w-full border-b border-[#E0E0E0]  py-1 font-inter outline-none focus:border-primary"
                                 required
                                 value={watch("email")}
-                                {...register("email", { required: true })}
+                                {...register("email", {
+                                    required: true,
+                                    maxLength: 25,
+                                })}
                             />
                             <input
                                 type="tel"
@@ -151,28 +153,43 @@ export default function Contactinfo() {
                                 className="w-full border-b border-[#E0E0E0]  py-1 font-inter outline-none focus:border-primary"
                                 required
                                 value={watch("phone")}
-                                {...register("phone", { required: true })}
+                                {...register("phone", {
+                                    required: true,
+                                    maxLength: 20,
+                                })}
+                            />
+                            <input
+                                type="subject"
+                                placeholder="Subject *"
+                                className="w-full border-b border-[#E0E0E0]  py-1 font-inter outline-none focus:border-primary"
+                                required
+                                value={watch("subject")}
+                                {...register("subject", {
+                                    required: true,
+                                    maxLength: 30,
+                                })}
                             />
 
-                            <input
+                            <textarea
                                 type="text"
-                                placeholder="Message"
-                                className="w-full border-b border-[#E0E0E0]  py-1 font-inter outline-none focus:border-primary"
+                                placeholder="Message *"
+                                className="w-full border border-[#E3E3E3]  py-1 font-inter outline-none focus:border-primary"
+                                rows="8"
                                 required
                                 maxLength={200}
                                 value={watch("message")}
                                 {...register("message", {
                                     required: true,
-                                    maxLength: 200,
+                                    maxLength: 250,
                                 })}
                             />
-                            <ImageUploading
+                            {/*<ImageUploading
                                 acceptType={acceptType}
                                 multiple={false}
                                 value={images}
                                 onChange={onChange}
                                 maxNumber={maxNumber}
-                                allowNonImageType="true"
+                                dataURLKey="data_url"
                             >
                                 {({ imageList, onImageUpload, onImageRemoveAll, onImageUpdate, onImageRemove, isDragging, dragProps }) => (
                                     <div className="w-full flex justify-center">
@@ -210,12 +227,12 @@ export default function Contactinfo() {
                                                         Drop your files here, or <span className="text-primary cursor-pointer">Upload</span>
                                                     </p>
 
-                                                    <p className="text-sm font-inter text-addgray">PDF, Max size: 5MB</p>
+                                                    <p className="text-sm font-inter text-addgray">PNG, GIF, JPG, Max size: 5MB</p>
                                                 </button>
                                             )}
                                     </div>
                                 )}
-                            </ImageUploading>
+                            </ImageUploading> */}
 
                             <div className="flex justify-center">
                                 <input

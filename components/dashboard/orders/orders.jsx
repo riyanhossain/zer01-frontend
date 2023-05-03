@@ -171,7 +171,11 @@ export default function Orders() {
 
                                     <button
                                         className="bg-[#FF0000] text-white font-inter font-semibold py-2 px-6 hover:bg-opacity-80 active:bg-opacity-90"
-                                        onClick={() => handleDelete(position._id)}
+                                        onClick={() => {
+                                            if (window.confirm('Are you sure you want to delete this item?')) {
+                                                handleDelete(position._id);
+                                            }
+                                        }}
                                     >
                                         Delete
                                     </button>

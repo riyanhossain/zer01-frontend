@@ -1,16 +1,15 @@
 {
   "ExpandedNodes": [
     "",
-    "\\components",
+    "\\assets",
+    "\\components\\about",
     "\\components\\contact",
     "\\components\\professional",
     "\\components\\professional\\tabs",
     "\\components\\professional\\tabs\\positions",
-    "\\lib",
     "\\lib\\api",
     "\\lib\\hooks",
     "\\utils"
   ],
-  "SelectedNode": "\\lib\\api\\contact.js",
   "PreviewInSolutionExplorer": false
 }
